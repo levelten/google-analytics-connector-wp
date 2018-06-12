@@ -9,9 +9,9 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-if ( ! class_exists( 'GAPWP_Tracking_TagManager' ) ) {
+if ( ! class_exists( 'GACWP_Tracking_TagManager' ) ) {
 
-	class GAPWP_Tracking_TagManager {
+	class GACWP_Tracking_TagManager {
 
 		private $gacwp;
 
@@ -20,9 +20,9 @@ if ( ! class_exists( 'GAPWP_Tracking_TagManager' ) ) {
 		private $uaid;
 
 		public function __construct() {
-			$this->gacwp = GAPWP();
+			$this->gacwp = GACWP();
 
-			$profile = GAPWP_Tools::get_selected_profile( $this->gacwp->config->options['ga_profiles_list'], $this->gacwp->config->options['tableid_jail'] );
+			$profile = GACWP_Tools::get_selected_profile( $this->gacwp->config->options['ga_profiles_list'], $this->gacwp->config->options['tableid_jail'] );
 
 			$this->uaid = esc_html( $profile[2] );
 
@@ -140,10 +140,10 @@ if ( ! class_exists( 'GAPWP_Tracking_TagManager' ) ) {
 			}
 
 			if ( ( $this->gacwp->config->options['tm_optout'] || $this->gacwp->config->options['tm_dnt_optout'] ) && ! empty( $this->uaid ) ) {
-				GAPWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'uaid' => $this->uaid, 'gaDntOptout' => $this->gacwp->config->options['tm_dnt_optout'], 'gaOptout' => $this->gacwp->config->options['tm_optout'] ) );
+				GACWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'uaid' => $this->uaid, 'gaDntOptout' => $this->gacwp->config->options['tm_dnt_optout'], 'gaOptout' => $this->gacwp->config->options['tm_optout'] ) );
 			}
 
-			GAPWP_Tools::load_view( 'front/views/tagmanager-code.php', array( 'containerid' => $this->gacwp->config->options['web_containerid'], 'vars' => $vars ) );
+			GACWP_Tools::load_view( 'front/views/tagmanager-code.php', array( 'containerid' => $this->gacwp->config->options['web_containerid'], 'vars' => $vars ) );
 		}
 
 		/**
@@ -177,7 +177,7 @@ if ( ! class_exists( 'GAPWP_Tracking_TagManager' ) ) {
 
 			$json = str_replace( array( '"&#91;', '&#93;"' ), array( '[', ']' ), $json ); // make verticalBoundaries a JavaScript array
 
-			GAPWP_Tools::load_view( 'front/views/tagmanager-amp-code.php', array( 'json' => $json, 'containerid' => $amp_containerid ) );
+			GACWP_Tools::load_view( 'front/views/tagmanager-amp-code.php', array( 'json' => $json, 'containerid' => $amp_containerid ) );
 		}
 	}
 }

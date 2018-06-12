@@ -7,7 +7,7 @@
 ?>
 
 <?php if ( 0 == $data['ga_with_gtag'] ):?>
-<!-- BEGIN GAPWP v<?php echo GAPWP_CURRENT_VERSION; ?> Universal Analytics - https://intelligencewp.com/google-analytics-plus-wordpress/ -->
+<!-- BEGIN GACWP v<?php echo GACWP_CURRENT_VERSION; ?> Universal Analytics - https://intelligencewp.com/google-analytics-plus-wordpress/ -->
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -15,9 +15,9 @@
 })(window,document,'script','<?php echo $data['tracking_script_path']?>','ga');
 <?php echo $data['trackingcode']?>
 </script>
-<!-- END GAPWP Universal Analytics -->
+<!-- END GACWP Universal Analytics -->
 <?php else:?>
-<!-- BEGIN GAPWP v<?php echo GAPWP_CURRENT_VERSION; ?> Global Site Tag - https://intelligencewp.com/google-analytics-plus-wordpress/ -->
+<!-- BEGIN GACWP v<?php echo GACWP_CURRENT_VERSION; ?> Global Site Tag - https://intelligencewp.com/google-analytics-plus-wordpress/ -->
 <script async src="<?php echo $data['tracking_script_path']?>?id=<?php echo $data['uaid']?>"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -34,5 +34,5 @@
     });
   }
 </script>
-<!-- END GAPWP Global Site Tag -->
+<!-- END GACWP Global Site Tag -->
 <?php endif;?>

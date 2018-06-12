@@ -206,7 +206,7 @@ Google Analytics+ for WP it's released under the GPLv2, you can use it free of c
 * Enhancements:  
 	* more informative alerts and suggestions on the authorization screen
 	* disable autocomplete for the access code input field to avoid reuse of the same unique authorization code
-	* GAPWP Endpoint improvements
+	* GACWP Endpoint improvements
 	* Error reporting improvements
 	* introducing the gacwp_maps_api_key filter
 * Bug Fixes:	

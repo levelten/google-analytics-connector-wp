@@ -9,7 +9,7 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-class GAPWP_Install {
+class GACWP_Install {
 
 	public static function install() {
 		if ( ! get_option( 'ga_dash_token' ) ) {

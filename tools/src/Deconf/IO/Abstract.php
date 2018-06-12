@@ -122,7 +122,7 @@ abstract class Deconf_IO_Abstract
   public function makeRequest(Deconf_Http_Request $request)
   {
 //Intel_Df::watchdog('Deconf_IO_Abstract::makeRequest $request', print_r($request, 1));
-  	// Add support for GAPWP Endpoint
+  	// Add support for GACWP Endpoint
     // TODO: disabled to prevent request to prior endpoint
   	//do_action('gacwp_endpoint_support', $request);
 
