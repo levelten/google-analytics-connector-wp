@@ -5,7 +5,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 ?>
-<!-- BEGIN GACWP v<?php echo GACWP_CURRENT_VERSION; ?> Tag Manager - https://intelligencewp.com/google-analytics-plus-wordpress/ -->
+<!-- BEGIN GACWP v<?php echo GACWP_CURRENT_VERSION; ?> Tag Manager - https://intelligencewp.com/google-analytics-connector-wordpress/ -->
 <script>
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push(<?php echo $data['vars']; ?>);

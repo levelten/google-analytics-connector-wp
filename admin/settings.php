@@ -95,19 +95,19 @@ final class GACWP_Settings {
 
 	  if ( isset( $_POST['options']['gacwp_hidden'] ) ) {
 	    if ( ! ( isset( $_POST['gacwp_security'] ) && wp_verify_nonce( $_POST['gacwp_security'], 'gacwp_form' ) ) ) {
-        $message .= "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-plus-wp' ) . "</p></div>";
+        $message .= "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-connector-wp' ) . "</p></div>";
         $validation_error = 1;
       }
       if ( ! $validation_error && empty($options['disable_settings_saved_msgs'])) {
-        $message .= "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-plus-wp' ) . "</p></div>";
+        $message .= "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-connector-wp' ) . "</p></div>";
       }
       elseif ( empty($options['disable_settings_saved_msgs']) ) {
-        $message .= "<div class='error' id='gacwp-autodismiss'><p>" . __( "Settings not saved.", 'google-analytics-plus-wp' ) . "</p></div>";
+        $message .= "<div class='error' id='gacwp-autodismiss'><p>" . __( "Settings not saved.", 'google-analytics-connector-wp' ) . "</p></div>";
       }
     }
 
 		if ( ! $gacwp->config->options['tableid_jail'] && ! $gacwp->config->options['tracking_id']) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-plus-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-plus-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_general_settings', false ), __( 'authorize the plugin', 'google-analytics-plus-wp' ) ) ) );
+			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-connector-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-connector-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_general_settings', false ), __( 'authorize the plugin', 'google-analytics-connector-wp' ) ) ) );
 		}
 		return $message;
 	}
@@ -123,7 +123,7 @@ final class GACWP_Settings {
 
     if (!empty($_POST['options']['tracking_id']) && !preg_match('/^ua-\d{4,9}-\d{1,4}$/i', $_POST['options']['tracking_id'])) {
       $validation_error = 1;
-      $message = sprintf( '<div class="error"><p>%s</p></div>', __( 'Tracking ID must be in the format of UA-12345678-9.', 'google-analytics-plus-wp' ) );
+      $message = sprintf( '<div class="error"><p>%s</p></div>', __( 'Tracking ID must be in the format of UA-12345678-9.', 'google-analytics-connector-wp' ) );
     }
 
 		$message .= self::global_notices( 'tracking',  $validation_error);
@@ -131,19 +131,19 @@ final class GACWP_Settings {
 
 		/*
 		if ( isset( $_POST['options']['gacwp_hidden'] ) ) {
-			$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-plus-wp' ) . "</p></div>";
+			$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-connector-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gacwp_security'] ) && wp_verify_nonce( $_POST['gacwp_security'], 'gacwp_form' ) ) ) {
-				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-connector-wp' ) . "</p></div>";
 			}
 		}
 		if ( ! $gacwp->config->options['tableid_jail'] ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-plus-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-plus-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_settings', false ), __( 'authorize the plugin', 'google-analytics-plus-wp' ) ) ) );
+			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-connector-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-connector-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_settings', false ), __( 'authorize the plugin', 'google-analytics-connector-wp' ) ) ) );
 		}
 		*/
 		?>
 <form name="gacwp_form" method="post" action="<?php  esc_url($_SERVER['REQUEST_URI']); ?>">
 	<div class="wrap">
-			<?php echo "<h2>" . __( "Google Analytics+ Tracking Settings", 'google-analytics-plus-wp' ) . "</h2>"; ?>
+			<?php echo "<h2>" . __( "Google Analytics Tracking Settings", 'google-analytics-connector-wp' ) . "</h2>"; ?>
 	</div>
 	<div id="poststuff" class="gacwp">
 		<div id="post-body" class="metabox-holder columns-2">
@@ -151,11 +151,11 @@ final class GACWP_Settings {
 				<div class="settings-wrapper">
 					<div class="inside">
 						<?php if ( 'universal' == $options['tracking_type'] ) :?>
-						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-plus-wp' ), 'events' => __( "Events Tracking", 'google-analytics-plus-wp' ), 'custom' => __( "Custom Definitions", 'google-analytics-plus-wp' ), 'exclude' => __( "Exclude Tracking", 'google-analytics-plus-wp' ), 'advanced' => __( "Advanced Settings", 'google-analytics-plus-wp' ), 'integration' => __( "Integration", 'google-analytics-plus-wp' ) );?>
+						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-connector-wp' ), 'events' => __( "Events Tracking", 'google-analytics-connector-wp' ), 'custom' => __( "Custom Definitions", 'google-analytics-connector-wp' ), 'exclude' => __( "Exclude Tracking", 'google-analytics-connector-wp' ), 'advanced' => __( "Advanced Settings", 'google-analytics-connector-wp' ), 'integration' => __( "Integration", 'google-analytics-connector-wp' ) );?>
 						<?php elseif ( 'tagmanager' == $options['tracking_type'] ) :?>
-						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-plus-wp' ), 'tmdatalayervars' => __( "DataLayer Variables", 'google-analytics-plus-wp' ), 'exclude' => __( "Exclude Tracking", 'google-analytics-plus-wp' ), 'tmadvanced' =>  __( "Advanced Settings", 'google-analytics-plus-wp' ), 'tmintegration' => __( "Integration", 'google-analytics-plus-wp' ) );?>
+						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-connector-wp' ), 'tmdatalayervars' => __( "DataLayer Variables", 'google-analytics-connector-wp' ), 'exclude' => __( "Exclude Tracking", 'google-analytics-connector-wp' ), 'tmadvanced' =>  __( "Advanced Settings", 'google-analytics-connector-wp' ), 'tmintegration' => __( "Integration", 'google-analytics-connector-wp' ) );?>
 						<?php else :?>
-						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-plus-wp' ) );?>
+						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-connector-wp' ) );?>
 						<?php endif; ?>
 						<?php self::navigation_tabs( $tabs ); ?>
 						<?php if ( isset( $message ) ) : ?>
@@ -164,18 +164,18 @@ final class GACWP_Settings {
 						<div id="gacwp-basic">
 							<table class="gacwp-settings-options">
 								<tr>
-									<td colspan="2"><?php echo "<h2>" . __( "Tracking Settings", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<td colspan="2"><?php echo "<h2>" . __( "Tracking Settings", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="tracking_type"><?php _e("Tracking Type:", 'google-analytics-plus-wp' ); ?>
+										<label for="tracking_type"><?php _e("Tracking Type:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
 										<select id="tracking_type" name="options[tracking_type]" onchange="this.form.submit()">
-											<option value="universal" <?php selected( $options['tracking_type'], 'universal' ); ?>><?php _e("Analytics", 'google-analytics-plus-wp');?></option>
-											<option value="tagmanager" <?php selected( $options['tracking_type'], 'tagmanager' ); ?>><?php _e("Tag Manager", 'google-analytics-plus-wp');?></option>
-											<option value="disabled" <?php selected( $options['tracking_type'], 'disabled' ); ?>><?php _e("Disabled", 'google-analytics-plus-wp');?></option>
+											<option value="universal" <?php selected( $options['tracking_type'], 'universal' ); ?>><?php _e("Analytics", 'google-analytics-connector-wp');?></option>
+											<option value="tagmanager" <?php selected( $options['tracking_type'], 'tagmanager' ); ?>><?php _e("Tag Manager", 'google-analytics-connector-wp');?></option>
+											<option value="disabled" <?php selected( $options['tracking_type'], 'disabled' ); ?>><?php _e("Disabled", 'google-analytics-connector-wp');?></option>
 										</select>
 									</td>
 								</tr>
@@ -185,11 +185,11 @@ final class GACWP_Settings {
 									<td>
 										<?php $profile_info = GACWP_Tools::get_selected_profile($gacwp->config->options['ga_profiles_list'], $gacwp->config->options['tableid_jail']); ?>
 										<?php if (!empty($profile_info[2])) : ?>
-										  <?php echo '<pre>' . __("View Name:", 'google-analytics-plus-wp') . "\t" . esc_html($profile_info[0]) . "<br />" . __("Tracking ID:", 'google-analytics-plus-wp') . "\t" . esc_html($profile_info[2]) . "<br />" . __("Default URL:", 'google-analytics-plus-wp') . "\t" . esc_html($profile_info[3]) . "<br />" . __("Time Zone:", 'google-analytics-plus-wp') . "\t" . esc_html($profile_info[5]) . '</pre>';?>
+										  <?php echo '<pre>' . __("View Name:", 'google-analytics-connector-wp') . "\t" . esc_html($profile_info[0]) . "<br />" . __("Tracking ID:", 'google-analytics-connector-wp') . "\t" . esc_html($profile_info[2]) . "<br />" . __("Default URL:", 'google-analytics-connector-wp') . "\t" . esc_html($profile_info[3]) . "<br />" . __("Time Zone:", 'google-analytics-connector-wp') . "\t" . esc_html($profile_info[5]) . '</pre>';?>
 									  <?php else : ?>
 									  <tr>
                       <td class="gacwp-settings-title">
-                        <label for="tracking_id"><?php _e("Tracking ID:", 'google-analytics-plus-wp' ); ?>
+                        <label for="tracking_id"><?php _e("Tracking ID:", 'google-analytics-connector-wp' ); ?>
                         </label>
                       </td>
                       <td>
@@ -208,13 +208,13 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("use global site tag gtag.js (not recommended)", 'google-analytics-plus-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("use global site tag gtag.js (not recommended)", 'google-analytics-connector-wp' );?></div>
 									</td>
 								</tr>
 								<?php elseif ( 'tagmanager' == $options['tracking_type'] ) : ?>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="tracking_type"><?php _e("Web Container ID:", 'google-analytics-plus-wp' ); ?>
+										<label for="tracking_type"><?php _e("Web Container ID:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
@@ -224,13 +224,13 @@ final class GACWP_Settings {
 								<?php endif; ?>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="trackingcode_infooter"><?php _e("Code Placement:", 'google-analytics-plus-wp' ); ?>
+										<label for="trackingcode_infooter"><?php _e("Code Placement:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
 										<select id="trackingcode_infooter" name="options[trackingcode_infooter]">
-											<option value="0" <?php selected( $options['trackingcode_infooter'], 0 ); ?>><?php _e("HTML Head", 'google-analytics-plus-wp');?></option>
-											<option value="1" <?php selected( $options['trackingcode_infooter'], 1 ); ?>><?php _e("HTML Body", 'google-analytics-plus-wp');?></option>
+											<option value="0" <?php selected( $options['trackingcode_infooter'], 0 ); ?>><?php _e("HTML Head", 'google-analytics-connector-wp');?></option>
+											<option value="1" <?php selected( $options['trackingcode_infooter'], 1 ); ?>><?php _e("HTML Body", 'google-analytics-connector-wp');?></option>
 										</select>
 									</td>
 								</tr>
@@ -239,7 +239,7 @@ final class GACWP_Settings {
 						<div id="gacwp-events">
 							<table class="gacwp-settings-options">
 								<tr>
-									<td colspan="2"><?php echo "<h2>" . __( "Events Tracking", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<td colspan="2"><?php echo "<h2>" . __( "Events Tracking", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 								</tr>
 								<tr>
 									<td colspan="2" class="gacwp-settings-title">
@@ -250,7 +250,7 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("track downloads, mailto, telephone and outbound links", 'google-analytics-plus-wp' ); ?></div>
+										<div class="switch-desc"><?php echo " ".__("track downloads, mailto, telephone and outbound links", 'google-analytics-connector-wp' ); ?></div>
 									</td>
 								</tr>
 								<tr>
@@ -262,7 +262,7 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("track affiliate links", 'google-analytics-plus-wp' ); ?></div>
+										<div class="switch-desc"><?php echo " ".__("track affiliate links", 'google-analytics-connector-wp' ); ?></div>
 									</td>
 								</tr>
 								<tr>
@@ -274,7 +274,7 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("track fragment identifiers, hashmarks (#) in URI links", 'google-analytics-plus-wp' ); ?></div>
+										<div class="switch-desc"><?php echo " ".__("track fragment identifiers, hashmarks (#) in URI links", 'google-analytics-connector-wp' ); ?></div>
 									</td>
 								</tr>
 								<tr>
@@ -286,7 +286,7 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("track form submit actions", 'google-analytics-plus-wp' ); ?></div>
+										<div class="switch-desc"><?php echo " ".__("track form submit actions", 'google-analytics-connector-wp' ); ?></div>
 									</td>
 								</tr>
 								<tr>
@@ -298,12 +298,12 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("track page scrolling depth", 'google-analytics-plus-wp' ); ?></div>
+										<div class="switch-desc"><?php echo " ".__("track page scrolling depth", 'google-analytics-connector-wp' ); ?></div>
 									</td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_event_downloads"><?php _e("Downloads Regex:", 'google-analytics-plus-wp'); ?>
+										<label for="ga_event_downloads"><?php _e("Downloads Regex:", 'google-analytics-connector-wp'); ?>
 										</label>
 									</td>
 									<td>
@@ -312,7 +312,7 @@ final class GACWP_Settings {
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_event_affiliates"><?php _e("Affiliates Regex:", 'google-analytics-plus-wp'); ?>
+										<label for="ga_event_affiliates"><?php _e("Affiliates Regex:", 'google-analytics-connector-wp'); ?>
 										</label>
 									</td>
 									<td>
@@ -321,13 +321,13 @@ final class GACWP_Settings {
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="trackingevents_infooter"><?php _e("Code Placement:", 'google-analytics-plus-wp' ); ?>
+										<label for="trackingevents_infooter"><?php _e("Code Placement:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
 										<select id="trackingevents_infooter" name="options[trackingevents_infooter]">
-											<option value="0" <?php selected( $options['trackingevents_infooter'], 0 ); ?>><?php _e("HTML Head", 'google-analytics-plus-wp');?></option>
-											<option value="1" <?php selected( $options['trackingevents_infooter'], 1 ); ?>><?php _e("HTML Body", 'google-analytics-plus-wp');?></option>
+											<option value="0" <?php selected( $options['trackingevents_infooter'], 0 ); ?>><?php _e("HTML Head", 'google-analytics-connector-wp');?></option>
+											<option value="1" <?php selected( $options['trackingevents_infooter'], 1 ); ?>><?php _e("HTML Body", 'google-analytics-connector-wp');?></option>
 										</select>
 									</td>
 								</tr>
@@ -336,11 +336,11 @@ final class GACWP_Settings {
 						<div id="gacwp-custom">
 							<table class="gacwp-settings-options">
 								<tr>
-									<td colspan="2"><?php echo "<h2>" . __( "Custom Dimensions", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<td colspan="2"><?php echo "<h2>" . __( "Custom Dimensions", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_author_dimindex"><?php _e("Authors:", 'google-analytics-plus-wp' ); ?>
+										<label for="ga_author_dimindex"><?php _e("Authors:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
@@ -353,7 +353,7 @@ final class GACWP_Settings {
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_pubyear_dimindex"><?php _e("Publication Year:", 'google-analytics-plus-wp' ); ?>
+										<label for="ga_pubyear_dimindex"><?php _e("Publication Year:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
@@ -366,7 +366,7 @@ final class GACWP_Settings {
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_pubyearmonth_dimindex"><?php _e("Publication Month:", 'google-analytics-plus-wp' ); ?>
+										<label for="ga_pubyearmonth_dimindex"><?php _e("Publication Month:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
@@ -379,7 +379,7 @@ final class GACWP_Settings {
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_category_dimindex"><?php _e("Categories:", 'google-analytics-plus-wp' ); ?>
+										<label for="ga_category_dimindex"><?php _e("Categories:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
@@ -392,7 +392,7 @@ final class GACWP_Settings {
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_user_dimindex"><?php _e("User Type:", 'google-analytics-plus-wp' ); ?>
+										<label for="ga_user_dimindex"><?php _e("User Type:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
@@ -405,7 +405,7 @@ final class GACWP_Settings {
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_tag_dimindex"><?php _e("Tags:", 'google-analytics-plus-wp' ); ?>
+										<label for="ga_tag_dimindex"><?php _e("Tags:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
@@ -421,77 +421,77 @@ final class GACWP_Settings {
 						<div id="gacwp-tmdatalayervars">
 							<table class="gacwp-settings-options">
 								<tr>
-									<td colspan="2"><?php echo "<h2>" . __( "Main Variables", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<td colspan="2"><?php echo "<h2>" . __( "Main Variables", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="tm_author_var"><?php _e("Authors:", 'google-analytics-plus-wp' ); ?>
+										<label for="tm_author_var"><?php _e("Authors:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
 										<select id="tm_author_var" name="options[tm_author_var]">
 											<option value="1" <?php selected( $options['tm_author_var'], 1 ); ?>>gacwpAuthor</option>
-											<option value="0" <?php selected( $options['tm_author_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-plus-wp' ); ?></option>
+											<option value="0" <?php selected( $options['tm_author_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-connector-wp' ); ?></option>
 										</select>
 									</td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="tm_pubyear_var"><?php _e("Publication Year:", 'google-analytics-plus-wp' ); ?>
+										<label for="tm_pubyear_var"><?php _e("Publication Year:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
 										<select id="tm_pubyear_var" name="options[tm_pubyear_var]">
 											<option value="1" <?php selected( $options['tm_pubyear_var'], 1 ); ?>>gacwpPublicationYear</option>
-											<option value="0" <?php selected( $options['tm_pubyear_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-plus-wp' ); ?></option>
+											<option value="0" <?php selected( $options['tm_pubyear_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-connector-wp' ); ?></option>
 										</select>
 									</td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="tm_pubyearmonth_var"><?php _e("Publication Month:", 'google-analytics-plus-wp' ); ?>
+										<label for="tm_pubyearmonth_var"><?php _e("Publication Month:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
 										<select id="tm_pubyearmonth_var" name="options[tm_pubyearmonth_var]">
 											<option value="1" <?php selected( $options['tm_pubyearmonth_var'], 1 ); ?>>gacwpPublicationYearMonth</option>
-											<option value="0" <?php selected( $options['tm_pubyearmonth_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-plus-wp' ); ?></option>
+											<option value="0" <?php selected( $options['tm_pubyearmonth_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-connector-wp' ); ?></option>
 										</select>
 									</td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="tm_category_var"><?php _e("Categories:", 'google-analytics-plus-wp' ); ?>
+										<label for="tm_category_var"><?php _e("Categories:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
 										<select id="tm_category_var" name="options[tm_category_var]">
 											<option value="1" <?php selected( $options['tm_category_var'], 1 ); ?>>gacwpCategory</option>
-											<option value="0" <?php selected( $options['tm_category_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-plus-wp' ); ?></option>
+											<option value="0" <?php selected( $options['tm_category_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-connector-wp' ); ?></option>
 										</select>
 									</td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="tm_user_var"><?php _e("User Type:", 'google-analytics-plus-wp' ); ?>
+										<label for="tm_user_var"><?php _e("User Type:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
 										<select id="tm_user_var" name="options[tm_user_var]">
 											<option value="1" <?php selected( $options['tm_user_var'], 1 ); ?>>gacwpUser</option>
-											<option value="0" <?php selected( $options['tm_user_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-plus-wp' ); ?></option>
+											<option value="0" <?php selected( $options['tm_user_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-connector-wp' ); ?></option>
 										</select>
 									</td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="tm_tag_var"><?php _e("Tags:", 'google-analytics-plus-wp' ); ?>
+										<label for="tm_tag_var"><?php _e("Tags:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
 										<select id="tm_tag_var" name="options[tm_tag_var]">
 											<option value="1" <?php selected( $options['tm_tag_var'], 1 ); ?>>gacwpTag</option>
-											<option value="0" <?php selected( $options['tm_tag_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-plus-wp' ); ?></option>
+											<option value="0" <?php selected( $options['tm_tag_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-connector-wp' ); ?></option>
 										</select>
 									</td>
 								</tr>
@@ -500,11 +500,11 @@ final class GACWP_Settings {
 						<div id="gacwp-advanced">
 							<table class="gacwp-settings-options">
 								<tr>
-									<td colspan="2"><?php echo "<h2>" . __( "Advanced Tracking", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<td colspan="2"><?php echo "<h2>" . __( "Advanced Tracking", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_speed_samplerate"><?php _e("Speed Sample Rate:", 'google-analytics-plus-wp'); ?>
+										<label for="ga_speed_samplerate"><?php _e("Speed Sample Rate:", 'google-analytics-connector-wp'); ?>
 										</label>
 									</td>
 									<td>
@@ -514,7 +514,7 @@ final class GACWP_Settings {
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_user_samplerate"><?php _e("User Sample Rate:", 'google-analytics-plus-wp'); ?>
+										<label for="ga_user_samplerate"><?php _e("User Sample Rate:", 'google-analytics-connector-wp'); ?>
 										</label>
 									</td>
 									<td>
@@ -531,7 +531,7 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("anonymize IPs while tracking", 'google-analytics-plus-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("anonymize IPs while tracking", 'google-analytics-connector-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
@@ -543,7 +543,7 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("enable support for user opt-out", 'google-analytics-plus-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("enable support for user opt-out", 'google-analytics-connector-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
@@ -555,7 +555,7 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"> <?php _e( 'exclude tracking for users sending Do Not Track header', 'google-analytics-plus-wp' ); ?></div>
+										<div class="switch-desc"> <?php _e( 'exclude tracking for users sending Do Not Track header', 'google-analytics-connector-wp' ); ?></div>
 									</td>
 								</tr>
 								<tr>
@@ -567,7 +567,7 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("enable remarketing, demographics and interests reports", 'google-analytics-plus-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("enable remarketing, demographics and interests reports", 'google-analytics-connector-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
@@ -579,7 +579,7 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("exclude events from bounce-rate and time on page calculation", 'google-analytics-plus-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("exclude events from bounce-rate and time on page calculation", 'google-analytics-connector-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
@@ -591,7 +591,7 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("enable enhanced link attribution", 'google-analytics-plus-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("enable enhanced link attribution", 'google-analytics-connector-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
@@ -603,7 +603,7 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("use hitCallback to increase event tracking accuracy", 'google-analytics-plus-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("use hitCallback to increase event tracking accuracy", 'google-analytics-connector-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
@@ -615,11 +615,11 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("enable Force SSL", 'google-analytics-plus-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("enable Force SSL", 'google-analytics-connector-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2"><?php echo "<h2>" . __( "Cross-domain Tracking", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<td colspan="2"><?php echo "<h2>" . __( "Cross-domain Tracking", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 								</tr>
 								<tr>
 									<td colspan="2" class="gacwp-settings-title">
@@ -630,12 +630,12 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("enable cross domain tracking", 'google-analytics-plus-wp' ); ?></div>
+										<div class="switch-desc"><?php echo " ".__("enable cross domain tracking", 'google-analytics-connector-wp' ); ?></div>
 									</td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_crossdomain_list"><?php _e("Cross Domains:", 'google-analytics-plus-wp'); ?>
+										<label for="ga_crossdomain_list"><?php _e("Cross Domains:", 'google-analytics-connector-wp'); ?>
 										</label>
 									</td>
 									<td>
@@ -643,11 +643,11 @@ final class GACWP_Settings {
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2"><?php echo "<h2>" . __( "Cookie Customization", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<td colspan="2"><?php echo "<h2>" . __( "Cookie Customization", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_cookiedomain"><?php _e("Cookie Domain:", 'google-analytics-plus-wp'); ?>
+										<label for="ga_cookiedomain"><?php _e("Cookie Domain:", 'google-analytics-connector-wp'); ?>
 										</label>
 									</td>
 									<td>
@@ -656,7 +656,7 @@ final class GACWP_Settings {
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_cookiename"><?php _e("Cookie Name:", 'google-analytics-plus-wp'); ?>
+										<label for="ga_cookiename"><?php _e("Cookie Name:", 'google-analytics-connector-wp'); ?>
 										</label>
 									</td>
 									<td>
@@ -665,12 +665,12 @@ final class GACWP_Settings {
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="ga_cookieexpires"><?php _e("Cookie Expires:", 'google-analytics-plus-wp'); ?>
+										<label for="ga_cookieexpires"><?php _e("Cookie Expires:", 'google-analytics-connector-wp'); ?>
 										</label>
 									</td>
 									<td>
 										<input type="text" id="ga_cookieexpires" name="options[ga_cookieexpires]" value="<?php echo esc_attr($options['ga_cookieexpires']); ?>" size="10">
-										<?php _e("seconds", 'google-analytics-plus-wp' ); ?>
+										<?php _e("seconds", 'google-analytics-connector-wp' ); ?>
 									</td>
 								</tr>
 							</table>
@@ -678,7 +678,7 @@ final class GACWP_Settings {
 						<div id="gacwp-integration">
 							<table class="gacwp-settings-options">
 								<tr>
-									<td colspan="2"><?php echo "<h2>" . __( "Accelerated Mobile Pages (AMP)", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<td colspan="2"><?php echo "<h2>" . __( "Accelerated Mobile Pages (AMP)", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 								</tr>
 								<tr>
 									<td colspan="2" class="gacwp-settings-title">
@@ -689,7 +689,7 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("enable tracking for Accelerated Mobile Pages (AMP)", 'google-analytics-plus-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("enable tracking for Accelerated Mobile Pages (AMP)", 'google-analytics-connector-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
@@ -701,27 +701,27 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("enable Google AMP Client Id API", 'google-analytics-plus-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("enable Google AMP Client Id API", 'google-analytics-connector-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2"><?php echo "<h2>" . __( "Ecommerce", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<td colspan="2"><?php echo "<h2>" . __( "Ecommerce", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="tracking_type"><?php _e("Ecommerce Tracking:", 'google-analytics-plus-wp' ); ?>
+										<label for="tracking_type"><?php _e("Ecommerce Tracking:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
 										<select id="ecommerce_mode" name="options[ecommerce_mode]" <?php disabled( $options['ga_with_gtag'], true );?>>
-											<option value="disabled" <?php selected( $options['ecommerce_mode'], 'disabled' ); ?>><?php _e("Disabled", 'google-analytics-plus-wp');?></option>
-											<option value="standard" <?php selected( $options['ecommerce_mode'], 'standard' ); ?>><?php _e("Ecommerce Plugin", 'google-analytics-plus-wp');?></option>
-											<option value="enhanced" <?php selected( $options['ecommerce_mode'], 'enhanced' ); selected( $options['ga_with_gtag'], true );?>><?php _e("Enhanced Ecommerce Plugin", 'google-analytics-plus-wp');?></option>
+											<option value="disabled" <?php selected( $options['ecommerce_mode'], 'disabled' ); ?>><?php _e("Disabled", 'google-analytics-connector-wp');?></option>
+											<option value="standard" <?php selected( $options['ecommerce_mode'], 'standard' ); ?>><?php _e("Ecommerce Plugin", 'google-analytics-connector-wp');?></option>
+											<option value="enhanced" <?php selected( $options['ecommerce_mode'], 'enhanced' ); selected( $options['ga_with_gtag'], true );?>><?php _e("Enhanced Ecommerce Plugin", 'google-analytics-connector-wp');?></option>
 										</select>
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2"><?php echo "<h2>" . __( "Optimize", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<td colspan="2"><?php echo "<h2>" . __( "Optimize", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 								</tr>
 								<tr>
 									<td colspan="2" class="gacwp-settings-title">
@@ -732,7 +732,7 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("enable Optimize tracking", 'google-analytics-plus-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("enable Optimize tracking", 'google-analytics-connector-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
@@ -744,12 +744,12 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("enable Page Hiding support", 'google-analytics-plus-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("enable Page Hiding support", 'google-analytics-connector-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="tracking_type"><?php _e("Container ID:", 'google-analytics-plus-wp' ); ?>
+										<label for="tracking_type"><?php _e("Container ID:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
@@ -758,41 +758,10 @@ final class GACWP_Settings {
 								</tr>
 							</table>
 						</div>
-						<div id="gacwp-tmadvanced">
-							<table class="gacwp-settings-options">
-								<tr>
-									<td colspan="2"><?php echo "<h2>" . __( "Advanced Tracking", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
-								</tr>
-								<tr>
-									<td colspan="2" class="gacwp-settings-title">
-										<div class="button-primary gacwp-settings-switchoo">
-											<input type="checkbox" name="options[tm_optout]" value="1" class="gacwp-settings-switchoo-checkbox" id="tm_optout" <?php checked( $options['tm_optout'], 1 ); ?>>
-											<label class="gacwp-settings-switchoo-label" for="tm_optout">
-												<div class="gacwp-settings-switchoo-inner"></div>
-												<div class="gacwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("enable support for user opt-out", 'google-analytics-plus-wp' );?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="gacwp-settings-title">
-										<div class="button-primary gacwp-settings-switchoo">
-											<input type="checkbox" name="options[tm_dnt_optout]" value="1" class="gacwp-settings-switchoo-checkbox" id="tm_dnt_optout" <?php checked( $options['tm_dnt_optout'], 1 ); ?>>
-											<label class="gacwp-settings-switchoo-label" for="tm_dnt_optout">
-												<div class="gacwp-settings-switchoo-inner"></div>
-												<div class="gacwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"> <?php _e( 'exclude tracking for users sending Do Not Track header', 'google-analytics-plus-wp' ); ?></div>
-									</td>
-								</tr>
-							</table>
-						</div>
 						<div id="gacwp-tmintegration">
 							<table class="gacwp-settings-options">
 								<tr>
-									<td colspan="2"><?php echo "<h2>" . __( "Accelerated Mobile Pages (AMP)", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<td colspan="2"><?php echo "<h2>" . __( "Accelerated Mobile Pages (AMP)", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 								</tr>
 								<tr>
 									<td colspan="2" class="gacwp-settings-title">
@@ -803,12 +772,12 @@ final class GACWP_Settings {
 												<div class="gacwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("enable tracking for Accelerated Mobile Pages (AMP)", 'google-analytics-plus-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("enable tracking for Accelerated Mobile Pages (AMP)", 'google-analytics-connector-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
 									<td class="gacwp-settings-title">
-										<label for="tracking_type"><?php _e("AMP Container ID:", 'google-analytics-plus-wp' ); ?>
+										<label for="tracking_type"><?php _e("AMP Container ID:", 'google-analytics-connector-wp' ); ?>
 										</label>
 									</td>
 									<td>
@@ -820,11 +789,11 @@ final class GACWP_Settings {
 						<div id="gacwp-exclude">
 							<table class="gacwp-settings-options">
 								<tr>
-									<td colspan="2"><?php echo "<h2>" . __( "Exclude Tracking", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<td colspan="2"><?php echo "<h2>" . __( "Exclude Tracking", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 								</tr>
 								<tr>
 									<td class="roles gacwp-settings-title">
-										<label for="track_exclude"><?php _e("Exclude tracking for:", 'google-analytics-plus-wp' ); ?></label>
+										<label for="track_exclude"><?php _e("Exclude tracking for:", 'google-analytics-connector-wp' ); ?></label>
 									</td>
 									<td class="gacwp-settings-roles">
 										<table>
@@ -860,7 +829,7 @@ final class GACWP_Settings {
 							</tr>
 							<tr>
 								<td colspan="2" class="submit">
-									<input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'google-analytics-plus-wp' ) ?>" />
+									<input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'google-analytics-connector-wp' ) ?>" />
 								</td>
 							</tr>
 						</table>
@@ -885,12 +854,12 @@ final class GACWP_Settings {
 		$message = self::global_notices( 'frontend' );
 		/*
 		if ( ! $gacwp->config->options['tableid_jail'] || ! $gacwp->config->options['token'] ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-plus-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-plus-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_settings', false ), __( 'authorize the plugin', 'google-analytics-plus-wp' ) ) ) );
+			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-connector-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-connector-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_settings', false ), __( 'authorize the plugin', 'google-analytics-connector-wp' ) ) ) );
 		}
 		*/
 		?>
 <div class="wrap">
-		<?php echo "<h2>" . __( "Google Analytics+ Errors & Debugging", 'google-analytics-plus-wp' ) . "</h2>"; ?>
+		<?php echo "<h2>" . __( "Google Analytics Errors & Debugging", 'google-analytics-connector-wp' ) . "</h2>"; ?>
 </div>
 <div id="poststuff" class="gacwp">
 	<div id="post-body" class="metabox-holder columns-2">
@@ -898,43 +867,43 @@ final class GACWP_Settings {
 			<div class="settings-wrapper">
 				<div class="inside">
 						<?php if (isset($message)) echo $message; ?>
-						<?php $tabs = array( 'errors' => __( "Errors & Details", 'google-analytics-plus-wp' ), 'config' => __( "Plugin Settings", 'google-analytics-plus-wp' ), 'sysinfo' => __( "System", 'google-analytics-plus-wp' ) ); ?>
+						<?php $tabs = array( 'errors' => __( "Errors & Details", 'google-analytics-connector-wp' ), 'config' => __( "Plugin Settings", 'google-analytics-connector-wp' ), 'sysinfo' => __( "System", 'google-analytics-connector-wp' ) ); ?>
 						<?php self::navigation_tabs( $tabs ); ?>
 						<div id="gacwp-errors">
 						<table class="gacwp-settings-logdata">
 							<tr>
 								<td>
-									<?php echo "<h2>" . __( "Error Details", 'google-analytics-plus-wp' ) . "</h2>"; ?>
+									<?php echo "<h2>" . __( "Error Details", 'google-analytics-connector-wp' ) . "</h2>"; ?>
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<?php $errors_count = GACWP_Tools::get_cache( 'errors_count' ); ?>
-									<pre class="gacwp-settings-logdata"><?php echo '<span>' . __("Count: ", 'google-analytics-plus-wp') . '</span>' . (int)$errors_count;?></pre>
+									<pre class="gacwp-settings-logdata"><?php echo '<span>' . __("Count: ", 'google-analytics-connector-wp') . '</span>' . (int)$errors_count;?></pre>
 									<?php $errors = print_r( GACWP_Tools::get_cache( 'last_error' ), true ) ? esc_html( print_r( GACWP_Tools::get_cache( 'last_error' ), true ) ) : ''; ?>
-									<?php $errors = str_replace( 'Deconf_', 'Google_', $errors); ?>
-									<pre class="gacwp-settings-logdata"><?php echo '<span>' . __("Last Error: ", 'google-analytics-plus-wp') . '</span>' . "\n" . $errors;?></pre>
-									<pre class="gacwp-settings-logdata"><?php echo '<span>' . __("GAPI Error: ", 'google-analytics-plus-wp') . '</span>'; echo "\n" . esc_html( print_r( GACWP_Tools::get_cache( 'gapi_errors' ), true ) ) ?></pre>
+									<?php $errors = str_replace( 'Deconfc_', 'Google_', $errors); ?>
+									<pre class="gacwp-settings-logdata"><?php echo '<span>' . __("Last Error: ", 'google-analytics-connector-wp') . '</span>' . "\n" . $errors;?></pre>
+									<pre class="gacwp-settings-logdata"><?php echo '<span>' . __("GAPI Error: ", 'google-analytics-connector-wp') . '</span>'; echo "\n" . esc_html( print_r( GACWP_Tools::get_cache( 'gapi_errors' ), true ) ) ?></pre>
 									<br />
 									<hr>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<?php echo "<h2>" . __( "Sampled Data", 'google-analytics-plus-wp' ) . "</h2>"; ?>
+									<?php echo "<h2>" . __( "Sampled Data", 'google-analytics-connector-wp' ) . "</h2>"; ?>
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<?php $sampling = GACWP_TOOLS::get_cache( 'sampleddata' ); ?>
 									<?php if ( $sampling ) :?>
-									<?php printf( __( "Last Detected on %s.", 'google-analytics-plus-wp' ), '<strong>'. $sampling['date'] . '</strong>' );?>
+									<?php printf( __( "Last Detected on %s.", 'google-analytics-connector-wp' ), '<strong>'. $sampling['date'] . '</strong>' );?>
 									<br />
-									<?php printf( __( "The report was based on %s of sessions.", 'google-analytics-plus-wp' ), '<strong>'. $sampling['percent'] . '</strong>' );?>
+									<?php printf( __( "The report was based on %s of sessions.", 'google-analytics-connector-wp' ), '<strong>'. $sampling['percent'] . '</strong>' );?>
 									<br />
-									<?php printf( __( "Sessions ratio: %s.", 'google-analytics-plus-wp' ), '<strong>'. $sampling['sessions'] . '</strong>' ); ?>
+									<?php printf( __( "Sessions ratio: %s.", 'google-analytics-connector-wp' ), '<strong>'. $sampling['sessions'] . '</strong>' ); ?>
 									<?php else :?>
-									<?php _e( "None", 'google-analytics-plus-wp' ); ?>
+									<?php _e( "None", 'google-analytics-connector-wp' ); ?>
 									<?php endif;?>
 								</td>
 							</tr>
@@ -943,7 +912,7 @@ final class GACWP_Settings {
 					<div id="gacwp-config">
 						<table class="gacwp-settings-options">
 							<tr>
-								<td><?php echo "<h2>" . __( "Plugin Configuration", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+								<td><?php echo "<h2>" . __( "Plugin Configuration", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 							</tr>
 							<tr>
 								<td>
@@ -957,7 +926,7 @@ final class GACWP_Settings {
 					<div id="gacwp-sysinfo">
 						<table class="gacwp-settings-options">
 							<tr>
-								<td><?php echo "<h2>" . __( "System Information", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+								<td><?php echo "<h2>" . __( "System Information", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 							</tr>
 							<tr>
 								<td>
@@ -980,7 +949,7 @@ final class GACWP_Settings {
 		}
 
 		$options = self::update_options( 'general' );
-		printf( '<div id="gapi-warning" class="updated"><p>%1$s <a href="https://intelligencewp.com/google-analytics-plus-wordpress/?utm_source=gacwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gacwp">%2$s</a></p></div>', __( 'Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', 'google-analytics-plus-wp' ), __( 'Library conflicts between WordPress plugins', 'google-analytics-plus-wp' ) );
+		printf( '<div id="gapi-warning" class="updated"><p>%1$s <a href="https://intelligencewp.com/google-analytics-connector-wordpress/?utm_source=gacwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gacwp">%2$s</a></p></div>', __( 'Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', 'google-analytics-connector-wp' ), __( 'Library conflicts between WordPress plugins', 'google-analytics-connector-wp' ) );
 		if ( null === $gacwp->gapi_controller ) {
 			$gacwp->gapi_controller = new GACWP_GAPI_Controller();
 		}
@@ -999,7 +968,7 @@ final class GACWP_Settings {
 					$gacwp->config->options['automatic_updates_minorversion'] = 1;
 					$gacwp->config->set_plugin_options();
 					$options = self::update_options( 'general' );
-					$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-plus-wp' ) . "</p></div>";
+					$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-connector-wp' ) . "</p></div>";
 					if ( $gacwp->config->options['token'] && $gacwp->gapi_controller->client->getAccessToken() ) {
 						$profiles = $gacwp->gapi_controller->refresh_profiles();
 						if ( is_array ( $profiles ) && ! empty( $profiles ) ) {
@@ -1012,10 +981,10 @@ final class GACWP_Settings {
 							$options = self::update_options( 'general' );
 						}
 					}
-				} catch ( Deconf_IO_Exception $e ) {
+				} catch ( Deconfc_IO_Exception $e ) {
 					$timeout = $gacwp->gapi_controller->get_timeouts( 'midnight' );
 					GACWP_Tools::set_error( $e, $timeout );
-				} catch ( Deconf_Service_Exception $e ) {
+				} catch ( Deconfc_Service_Exception $e ) {
 					$timeout = $gacwp->gapi_controller->get_timeouts( 'midnight' );
 					GACWP_Tools::set_error( $e, $timeout );
 				} catch ( Exception $e ) {
@@ -1025,18 +994,18 @@ final class GACWP_Settings {
 				}
 			} else {
 				if ( 1 == stripos( 'x' . $_POST['gacwp_access_code'], 'UA-', 1 ) ) {
-					$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'google-analytics-plus-wp' ) . ".</p></div>";
+					$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'google-analytics-connector-wp' ) . ".</p></div>";
 				} else {
-					$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "You can only use the access code <strong>once</strong>, please generate a <strong>new access</strong> code following the instructions!", 'google-analytics-plus-wp' ) . ".</p></div>";
+					$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "You can only use the access code <strong>once</strong>, please generate a <strong>new access</strong> code following the instructions!", 'google-analytics-connector-wp' ) . ".</p></div>";
 				}
 			}
 		}
 		if ( isset( $_POST['Clear'] ) ) {
 			if ( isset( $_POST['gacwp_security'] ) && wp_verify_nonce( $_POST['gacwp_security'], 'gacwp_form' ) ) {
 				GACWP_Tools::clear_cache();
-				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Cleared Cache.", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Cleared Cache.", 'google-analytics-connector-wp' ) . "</p></div>";
 			} else {
-				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-connector-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Reset'] ) ) {
@@ -1044,10 +1013,10 @@ final class GACWP_Settings {
 				$gacwp->gapi_controller->reset_token( TRUE );
 				GACWP_Tools::clear_cache();
 
-				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'google-analytics-connector-wp' ) . "</p></div>";
 				$options = self::update_options( 'Reset' );
 			} else {
-				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-connector-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Reset_Err'] ) ) {
@@ -1085,25 +1054,25 @@ final class GACWP_Settings {
 				GACWP_Tools::delete_cache( 'last_error' );
 				GACWP_Tools::delete_cache( 'gapi_errors' );
 				delete_option( 'gacwp_got_updated' );
-				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "All errors reseted.", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "All errors reseted.", 'google-analytics-connector-wp' ) . "</p></div>";
 			} else {
-				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-connector-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['options']['gacwp_hidden'] ) && !empty( $_POST['Submit'] ) && ! isset( $_POST['Clear'] ) && ! isset( $_POST['Reset'] ) && ! isset( $_POST['Reset_Err'] ) ) {
-			$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-plus-wp' ) . "</p></div>";
+			$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-connector-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gacwp_security'] ) && wp_verify_nonce( $_POST['gacwp_security'], 'gacwp_form' ) ) ) {
-				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-connector-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Hide'] ) ) {
 			if ( isset( $_POST['gacwp_security'] ) && wp_verify_nonce( $_POST['gacwp_security'], 'gacwp_form' ) ) {
-				$message = "<div class='updated' id='gacwp-action'><p>" . __( "All other domains/properties were removed.", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gacwp-action'><p>" . __( "All other domains/properties were removed.", 'google-analytics-connector-wp' ) . "</p></div>";
 				$lock_profile = GACWP_Tools::get_selected_profile( $gacwp->config->options['ga_profiles_list'], $gacwp->config->options['tableid_jail'] );
 				$gacwp->config->options['ga_profiles_list'] = array( $lock_profile );
 				$options = self::update_options( 'general' );
 			} else {
-				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-connector-wp' ) . "</p></div>";
 			}
 		}
 
@@ -1132,7 +1101,7 @@ final class GACWP_Settings {
 		}
 		?>
 	<div class="wrap">
-	<?php echo "<h2>" . __( "Google Analytics+ General Settings", 'google-analytics-plus-wp' ) . "</h2>"; ?>
+	<?php echo "<h2>" . __( "Google Analytics General Settings", 'google-analytics-connector-wp' ) . "</h2>"; ?>
 					<hr>
 					</div>
 					<div id="poststuff" class="gacwp">
@@ -1141,13 +1110,13 @@ final class GACWP_Settings {
 								<div class="settings-wrapper">
 									<div class="inside">
 										<?php if ( $gacwp->gapi_controller->gapi_errors_handler() || GACWP_Tools::get_cache( 'last_error' ) ) : ?>
-													<?php $message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-plus-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-plus-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_settings', false ), __( 'authorize the plugin', 'google-analytics-plus-wp' ) ) ) );?>
+													<?php $message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-connector-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-connector-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_settings', false ), __( 'authorize the plugin', 'google-analytics-connector-wp' ) ) ) );?>
 										<?php endif;?>
 										<?php if ( isset( $_POST['Authorize'] ) ) : ?>
 											<?php GACWP_Tools::clear_cache(); ?>
 											<?php $gacwp->gapi_controller->token_request(); ?>
 											<div class="updated">
-											<p><?php _e( "Use the red link (see below) to generate and get your access code! You need to generate a new code each time you authorize!", 'google-analytics-plus-wp' )?></p>
+											<p><?php _e( "Use the red link (see below) to generate and get your access code! You need to generate a new code each time you authorize!", 'google-analytics-connector-wp' )?></p>
 										</div>
 										<?php else : ?>
 										<?php if ( isset( $message ) ) :?>
@@ -1159,26 +1128,26 @@ final class GACWP_Settings {
 											<table class="gacwp-settings-options">
 												<tr>
 													<td colspan="2">
-														<?php echo "<h2>" . __( "Google Analytics Setup", 'google-analytics-plus-wp' ) . "</h2>";?>
+														<?php echo "<h2>" . __( "Google Analytics Setup", 'google-analytics-connector-wp' ) . "</h2>";?>
 													</td>
 												</tr>
 												<tr>
                           <td class="gacwp-settings-title">
-                            <label for="setup_mode"><?php _e("Setup Mode:", 'google-analytics-plus-wp' ); ?>
+                            <label for="setup_mode"><?php _e("Setup Mode:", 'google-analytics-connector-wp' ); ?>
                             </label>
                           </td>
                           <td>
                             <select id="setup_mode" name="setup_mode" onchange="this.form.submit()"<?php if ($options['token']) { echo ' xdisabled="disabled"'; } ?>>
-                              <option value="" <?php selected( $_POST['setup_mode'], '' ); ?><?php if ($options['token']) { echo ' disabled="disabled"'; } ?>><?php _e("Tracking only", 'google-analytics-plus-wp');?></option>
-                              <option value="gapi" <?php selected( $_POST['setup_mode'], 'gapi' ); ?>><?php _e("Tracking & Reporting API", 'google-analytics-plus-wp');?></option>
-                              <option value="gapi-" <?php selected( $_POST['setup_mode'], 'gapi-' ); ?>><?php _e("Reporting API only", 'google-analytics-plus-wp');?></option>
+                              <option value="" <?php selected( $_POST['setup_mode'], '' ); ?><?php if ($options['token']) { echo ' disabled="disabled"'; } ?>><?php _e("Tracking only", 'google-analytics-connector-wp');?></option>
+                              <option value="gapi" <?php selected( $_POST['setup_mode'], 'gapi' ); ?>><?php _e("Tracking & Reporting API", 'google-analytics-connector-wp');?></option>
+                              <option value="gapi-" <?php selected( $_POST['setup_mode'], 'gapi-' ); ?>><?php _e("Reporting API only", 'google-analytics-connector-wp');?></option>
                             </select>
                           </td>
                         </tr>
                         <?php if ($_POST['setup_mode'] == '') : ?>
                           <tr>
                             <td class="gacwp-settings-title">
-                              <label for="tracking_id"><?php _e("Tracking ID:", 'google-analytics-plus-wp' ); ?>
+                              <label for="tracking_id"><?php _e("Tracking ID:", 'google-analytics-connector-wp' ); ?>
                               </label>
                             </td>
                             <td>
@@ -1189,24 +1158,24 @@ final class GACWP_Settings {
                           <?php if ( $options['token'] ) : ?>
                             <tr>
                               <td class="gacwp-settings-title">
-                                <label for="tableid_jail"><?php _e("Tracking ID / View:", 'google-analytics-plus-wp' ); ?></label>
+                                <label for="tableid_jail"><?php _e("Tracking ID / View:", 'google-analytics-connector-wp' ); ?></label>
                               </td>
                               <td>
                                 <select id="tableid_jail" <?php disabled(empty($options['ga_profiles_list']) || 1 == count($options['ga_profiles_list']), true); ?> name="options[tableid_jail]">
                                   <?php if ( ! empty( $options['ga_profiles_list'] ) ) : ?>
                                     <?php foreach ( $options['ga_profiles_list'] as $items ) : ?>
                                       <?php if ( $items[3] ) : ?>
-                                        <option value="<?php echo esc_attr( $items[1] ); ?>" <?php selected( $items[1], $options['tableid_jail'] ); ?> title="<?php _e( "View Name:", 'google-analytics-plus-wp' ); ?> <?php echo esc_attr( $items[0] ); ?>">
+                                        <option value="<?php echo esc_attr( $items[1] ); ?>" <?php selected( $items[1], $options['tableid_jail'] ); ?> title="<?php _e( "View Name:", 'google-analytics-connector-wp' ); ?> <?php echo esc_attr( $items[0] ); ?>">
                                           <?php echo esc_html( $items[2] ); ?> &gt; <?php echo esc_attr( $items[0] ); ?>
                                         </option>
                                       <?php endif; ?>
                                     <?php endforeach; ?>
                                   <?php else : ?>
-                                    <option value=""><?php _e( "Property not found", 'google-analytics-plus-wp' ); ?></option>
+                                    <option value=""><?php _e( "Property not found", 'google-analytics-connector-wp' ); ?></option>
                                   <?php endif; ?>
                                 </select>
                                 <?php if ( count( $options['ga_profiles_list'] ) > 1 ) : ?>
-                                  &nbsp;<input type="submit" name="Hide" class="button button-secondary" value="<?php _e( "Lock Selection", 'google-analytics-plus-wp' ); ?>" />
+                                  &nbsp;<input type="submit" name="Hide" class="button button-secondary" value="<?php _e( "Lock Selection", 'google-analytics-connector-wp' ); ?>" />
                                 <?php endif; ?>
                                </td>
                             </tr>
@@ -1216,33 +1185,33 @@ final class GACWP_Settings {
                               <td class="gacwp-settings-title"></td>
                               <td>
                               <?php $profile_info = GACWP_Tools::get_selected_profile( $gacwp->config->options['ga_profiles_list'], $gacwp->config->options['tableid_jail'] ); ?>
-                                <pre><?php echo __( "View Name:", 'google-analytics-plus-wp' ) . "\t" . esc_html( $profile_info[0] ) . "<br />" . __( "Tracking ID:", 'google-analytics-plus-wp' ) . "\t" . esc_html( $profile_info[2] ) . "<br />" . __( "Default URL:", 'google-analytics-plus-wp' ) . "\t" . esc_html( $profile_info[3] ) . "<br />" . __( "Time Zone:", 'google-analytics-plus-wp' ) . "\t" . esc_html( $profile_info[5] );?></pre>
+                                <pre><?php echo __( "View Name:", 'google-analytics-connector-wp' ) . "\t" . esc_html( $profile_info[0] ) . "<br />" . __( "Tracking ID:", 'google-analytics-connector-wp' ) . "\t" . esc_html( $profile_info[2] ) . "<br />" . __( "Default URL:", 'google-analytics-connector-wp' ) . "\t" . esc_html( $profile_info[3] ) . "<br />" . __( "Time Zone:", 'google-analytics-connector-wp' ) . "\t" . esc_html( $profile_info[5] );?></pre>
                               </td>
                             </tr>
                           <?php endif; // END if $options['tableid_jail'] ?>
                           <tr>
                             <td colspan="2">
-                              <?php echo "<h3>" . __( "Google Analytics API Authorization", 'google-analytics-plus-wp' ) . "</h3>";?>
+                              <?php echo "<h3>" . __( "Google Analytics API Authorization", 'google-analytics-connector-wp' ) . "</h3>";?>
                             </td>
                           </tr>
                           <php if (0): // TODO: create doc ?>
                           <tr>
                             <td colspan="2" class="gacwp-settings-info">
-                              <?php printf(__('You need to create a %1$s and watch this %2$s before proceeding to authorization.', 'google-analytics-plus-wp'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://intelligencewp.com/creating-a-google-analytics-account/?utm_source=gacwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gacwp', __("free analytics account", 'google-analytics-plus-wp')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://intelligencewp.com/google-analytics-plus-wordpress/?utm_source=gacwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gacwp', __("video tutorial", 'google-analytics-plus-wp')));?>
+                              <?php printf(__('You need to create a %1$s and watch this %2$s before proceeding to authorization.', 'google-analytics-connector-wp'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://intelligencewp.com/creating-a-google-analytics-account/?utm_source=gacwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gacwp', __("free analytics account", 'google-analytics-connector-wp')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://intelligencewp.com/google-analytics-connector-wordpress/?utm_source=gacwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gacwp', __("video tutorial", 'google-analytics-connector-wp')));?>
                             </td>
                           </tr>
                           <php endif; ?>
                           <?php if (! $options['token'] || ($options['user_api']  && ! $options['network_mode'])) : ?>
                             <tr>
                               <td colspan="2" class="gacwp-settings-info">
-                                <input name="options[user_api]" type="checkbox" id="user_api" value="1" <?php checked( $options['user_api'], 1 ); ?> onchange="this.form.submit()" <?php echo ($options['network_mode'])?'disabled="disabled"':''; ?> /><?php echo " ".__("developer mode (requires advanced API knowledge)", 'google-analytics-plus-wp' );?>
+                                <input name="options[user_api]" type="checkbox" id="user_api" value="1" <?php checked( $options['user_api'], 1 ); ?> onchange="this.form.submit()" <?php echo ($options['network_mode'])?'disabled="disabled"':''; ?> /><?php echo " ".__("developer mode (requires advanced API knowledge)", 'google-analytics-connector-wp' );?>
                               </td>
                             </tr>
                           <?php endif; ?>
                           <?php if ($options['user_api']  && ! $options['network_mode']) : ?>
                             <tr>
                               <td class="gacwp-settings-title">
-                                <label for="options[client_id]"><?php _e("Client ID:", 'google-analytics-plus-wp'); ?></label>
+                                <label for="options[client_id]"><?php _e("Client ID:", 'google-analytics-connector-wp'); ?></label>
                               </td>
                               <td>
                                 <input type="text" name="options[client_id]" value="<?php echo esc_attr($options['client_id']); ?>" size="40" required="required">
@@ -1250,7 +1219,7 @@ final class GACWP_Settings {
                             </tr>
                             <tr>
                               <td class="gacwp-settings-title">
-                                <label for="options[client_secret]"><?php _e("Client Secret:", 'google-analytics-plus-wp'); ?></label>
+                                <label for="options[client_secret]"><?php _e("Client Secret:", 'google-analytics-connector-wp'); ?></label>
                               </td>
                               <td>
                                 <input type="text" name="options[client_secret]" value="<?php echo esc_attr($options['client_secret']); ?>" size="40" required="required">
@@ -1262,9 +1231,9 @@ final class GACWP_Settings {
                           <?php if ( $options['token'] ) : ?>
                             <tr>
                               <td colspan="2">
-                                <input type="submit" name="Reset" class="button button-secondary" value="<?php _e( "Clear Authorization", 'google-analytics-plus-wp' ); ?>" <?php echo $options['network_mode']?'disabled="disabled"':''; ?> />
-                                <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'google-analytics-plus-wp' ); ?>" />
-                                <input type="submit" name="Reset_Err" class="button button-secondary" value="<?php _e( "Report & Reset Errors", 'google-analytics-plus-wp' ); ?>" />
+                                <input type="submit" name="Reset" class="button button-secondary" value="<?php _e( "Clear Authorization", 'google-analytics-connector-wp' ); ?>" <?php echo $options['network_mode']?'disabled="disabled"':''; ?> />
+                                <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'google-analytics-connector-wp' ); ?>" />
+                                <input type="submit" name="Reset_Err" class="button button-secondary" value="<?php _e( "Report & Reset Errors", 'google-analytics-connector-wp' ); ?>" />
                               </td>
                             </tr>
                             <tr>
@@ -1280,8 +1249,8 @@ final class GACWP_Settings {
                             </tr>
                             <tr>
                               <td colspan="2">
-                                <input type="submit" name="Authorize" class="button button-secondary" id="authorize" value="<?php _e( "Authorize Plugin", 'google-analytics-plus-wp' ); ?>" <?php echo $options['network_mode']?'disabled="disabled"':''; ?> />
-                                <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'google-analytics-plus-wp' ); ?>" />
+                                <input type="submit" name="Authorize" class="button button-secondary" id="authorize" value="<?php _e( "Authorize Plugin", 'google-analytics-connector-wp' ); ?>" <?php echo $options['network_mode']?'disabled="disabled"':''; ?> />
+                                <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'google-analytics-connector-wp' ); ?>" />
                               </td>
                             </tr>
                             <tr>
@@ -1293,11 +1262,11 @@ final class GACWP_Settings {
                         <?php endif; // END if $_POST['setup_mode] == '' ?>
                         <?php if ($options['token'] || ($_POST['setup_mode'] == '' && $options['tracking_id'])) : ?>
                           <tr>
-                            <td colspan="2"><?php echo "<h2>" . __( "Theme", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+                            <td colspan="2"><?php echo "<h2>" . __( "Theme", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
                           </tr>
                           <tr>
                             <td class="gacwp-settings-title">
-                              <label for="theme_color"><?php _e("Theme Color:", 'google-analytics-plus-wp' ); ?></label>
+                              <label for="theme_color"><?php _e("Theme Color:", 'google-analytics-connector-wp' ); ?></label>
                             </td>
                             <td>
                               <input type="text" id="theme_color" class="theme_color" name="options[theme_color]" value="<?php echo esc_attr($options['theme_color']); ?>" size="10">
@@ -1310,7 +1279,7 @@ final class GACWP_Settings {
                           </tr>
                           <?php if ( !is_multisite()) :?>
                             <tr>
-                              <td colspan="2"><?php echo "<h2>" . __( "Automatic Updates", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+                              <td colspan="2"><?php echo "<h2>" . __( "Automatic Updates", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
                             </tr>
                             <tr>
                               <td colspan="2" class="gacwp-settings-title">
@@ -1321,7 +1290,7 @@ final class GACWP_Settings {
                                     <div class="gacwp-settings-switchoo-switch"></div>
                                   </label>
                                 </div>
-                                <div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintenance releases only)", 'google-analytics-plus-wp' );?></div>
+                                <div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintenance releases only)", 'google-analytics-connector-wp' );?></div>
                               </td>
                             </tr>
                             <tr>
@@ -1334,7 +1303,7 @@ final class GACWP_Settings {
                         <?php if ($options['token'] || ( '' == $_POST['setup_mode'])) : ?>
                           <tr>
                             <td colspan="2" class="submit">
-                              <input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'google-analytics-plus-wp' ) ?>" />
+                              <input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'google-analytics-connector-wp' ) ?>" />
                             </td>
                           </tr>
                         <?php endif; // END if ($options['token'] || ( '' == $_POST['setup_mode'])) ?>
@@ -1361,7 +1330,7 @@ final class GACWP_Settings {
 		/*
 		 * Include GAPI
 		 */
-		echo '<div id="gapi-warning" class="updated"><p>' . __( 'Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', 'google-analytics-plus-wp' ) . ' <a href="https://intelligencewp.com/google-analytics-plus-wordpress/?utm_source=gacwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gacwp">Library conflicts between WordPress plugins</a></p></div>';
+		echo '<div id="gapi-warning" class="updated"><p>' . __( 'Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', 'google-analytics-connector-wp' ) . ' <a href="https://intelligencewp.com/google-analytics-connector-wordpress/?utm_source=gacwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gacwp">Library conflicts between WordPress plugins</a></p></div>';
 
 		if ( null === $gacwp->gapi_controller ) {
 			$gacwp->gapi_controller = new GACWP_GAPI_Controller();
@@ -1378,7 +1347,7 @@ final class GACWP_Settings {
 					$gacwp->config->options['automatic_updates_minorversion'] = 1;
 					$gacwp->config->set_plugin_options( true );
 					$options = self::update_options( 'network' );
-					$message = "<div class='updated' id='gacwp-action'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-plus-wp' ) . "</p></div>";
+					$message = "<div class='updated' id='gacwp-action'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-connector-wp' ) . "</p></div>";
 					if ( is_multisite() ) { // Cleanup errors on the entire network
 						foreach ( GACWP_Tools::get_sites( array( 'number' => apply_filters( 'gacwp_sites_limit', 100 ) ) ) as $blog ) {
 							switch_to_blog( $blog['blog_id'] );
@@ -1402,10 +1371,10 @@ final class GACWP_Settings {
 							$options = self::update_options( 'network' );
 						}
 					}
-				} catch ( Deconf_IO_Exception $e ) {
+				} catch ( Deconfc_IO_Exception $e ) {
 					$timeout = $gacwp->gapi_controller->get_timeouts( 'midnight' );
 					GACWP_Tools::set_error( $e, $timeout );
-				} catch ( Deconf_Service_Exception $e ) {
+				} catch ( Deconfc_Service_Exception $e ) {
 					$timeout = $gacwp->gapi_controller->get_timeouts( 'midnight' );
 					GACWP_Tools::set_error( $e, $timeout );
 				} catch ( Exception $e ) {
@@ -1415,16 +1384,16 @@ final class GACWP_Settings {
 				}
 			} else {
 				if ( 1 == stripos( 'x' . $_POST['gacwp_access_code'], 'UA-', 1 ) ) {
-					$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'google-analytics-plus-wp' ) . ".</p></div>";
+					$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'google-analytics-connector-wp' ) . ".</p></div>";
 				} else {
-					$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "You can only use the access code <strong>once</strong>, please generate a <strong>new access code</strong> using the red link", 'google-analytics-plus-wp' ) . "!</p></div>";
+					$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "You can only use the access code <strong>once</strong>, please generate a <strong>new access code</strong> using the red link", 'google-analytics-connector-wp' ) . "!</p></div>";
 				}
 			}
 		}
 		if ( isset( $_POST['Refresh'] ) ) {
 			if ( isset( $_POST['gacwp_security'] ) && wp_verify_nonce( $_POST['gacwp_security'], 'gacwp_form' ) ) {
 				$gacwp->config->options['ga_profiles_list'] = array();
-				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Properties refreshed.", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Properties refreshed.", 'google-analytics-connector-wp' ) . "</p></div>";
 				$options = self::update_options( 'network' );
 				if ( $gacwp->config->options['token'] && $gacwp->gapi_controller->client->getAccessToken() ) {
 					if ( ! empty( $gacwp->config->options['ga_profiles_list'] ) ) {
@@ -1443,46 +1412,46 @@ final class GACWP_Settings {
 					}
 				}
 			} else {
-				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-connector-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Clear'] ) ) {
 			if ( isset( $_POST['gacwp_security'] ) && wp_verify_nonce( $_POST['gacwp_security'], 'gacwp_form' ) ) {
 				GACWP_Tools::clear_cache();
-				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Cleared Cache.", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Cleared Cache.", 'google-analytics-connector-wp' ) . "</p></div>";
 			} else {
-				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-connector-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Reset'] ) ) {
 			if ( isset( $_POST['gacwp_security'] ) && wp_verify_nonce( $_POST['gacwp_security'], 'gacwp_form' ) ) {
 				$gacwp->gapi_controller->reset_token();
 				GACWP_Tools::clear_cache();
-				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'google-analytics-connector-wp' ) . "</p></div>";
 				$options = self::update_options( 'Reset' );
 			} else {
-				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-connector-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['options']['gacwp_hidden'] ) && ! isset( $_POST['Clear'] ) && ! isset( $_POST['Reset'] ) && ! isset( $_POST['Refresh'] ) ) {
-			$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-plus-wp' ) . "</p></div>";
+			$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-connector-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gacwp_security'] ) && wp_verify_nonce( $_POST['gacwp_security'], 'gacwp_form' ) ) ) {
-				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-connector-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Hide'] ) ) {
 			if ( isset( $_POST['gacwp_security'] ) && wp_verify_nonce( $_POST['gacwp_security'], 'gacwp_form' ) ) {
-				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "All other domains/properties were removed.", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "All other domains/properties were removed.", 'google-analytics-connector-wp' ) . "</p></div>";
 				$lock_profile = GACWP_Tools::get_selected_profile( $gacwp->config->options['ga_profiles_list'], $gacwp->config->options['tableid_jail'] );
 				$gacwp->config->options['ga_profiles_list'] = array( $lock_profile );
 				$options = self::update_options( 'network' );
 			} else {
-				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-connector-wp' ) . "</p></div>";
 			}
 		}
 		?>
 <div class="wrap">
-											<h2><?php _e( "Google Analytics Settings", 'google-analytics-plus-wp' );?></h2>
+											<h2><?php _e( "Google Analytics Settings", 'google-analytics-connector-wp' );?></h2>
 											<hr>
 										</div>
 										<div id="poststuff" class="gacwp">
@@ -1491,13 +1460,13 @@ final class GACWP_Settings {
 													<div class="settings-wrapper">
 														<div class="inside">
 					<?php if ( $gacwp->gapi_controller->gapi_errors_handler() || GACWP_Tools::get_cache( 'last_error' ) ) : ?>
-						<?php $message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-plus-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-plus-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_settings', false ), __( 'authorize the plugin', 'google-analytics-plus-wp' ) ) ) );?>
+						<?php $message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-connector-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-connector-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_settings', false ), __( 'authorize the plugin', 'google-analytics-connector-wp' ) ) ) );?>
 					<?php endif; ?>
 					<?php if ( isset( $_POST['Authorize'] ) ) : ?>
 						<?php GACWP_Tools::clear_cache();?>
 						<?php $gacwp->gapi_controller->token_request();?>
 					<div class="updated">
-																<p><?php _e( "Use the red link (see below) to generate and get your access code! You need to generate a new code each time you authorize!", 'google-analytics-plus-wp' );?></p>
+																<p><?php _e( "Use the red link (see below) to generate and get your access code! You need to generate a new code each time you authorize!", 'google-analytics-connector-wp' );?></p>
 															</div>
 					<?php else : ?>
 						<?php if ( isset( $message ) ) : ?>
@@ -1509,7 +1478,7 @@ final class GACWP_Settings {
 						<table class="gacwp-settings-options">
 							<tr>
 								<td colspan="2">
-						  		<?php echo "<h2>" . __( "Network Setup", 'google-analytics-plus-wp' ) . "</h2>"; ?>
+						  		<?php echo "<h2>" . __( "Network Setup", 'google-analytics-connector-wp' ) . "</h2>"; ?>
 								</td>
 							</tr>
               <tr>
@@ -1521,7 +1490,7 @@ final class GACWP_Settings {
                       <div class="gacwp-settings-switchoo-switch"></div>
                     </label>
                   </div>
-                  <div class="switch-desc"><?php echo " ".__("use a single Google Analytics account for the entire network", 'google-analytics-plus-wp' );?></div>
+                  <div class="switch-desc"><?php echo " ".__("use a single Google Analytics account for the entire network", 'google-analytics-connector-wp' );?></div>
                 </td>
               </tr>
 							<?php if ($options['network_mode']) : ?>
@@ -1531,26 +1500,26 @@ final class GACWP_Settings {
                 </td>
               </tr>
               <tr>
-                <td colspan="2"><?php echo "<h2>" . __( "Plugin Authorization", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+                <td colspan="2"><?php echo "<h2>" . __( "Plugin Authorization", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
               </tr>
               <?php if (0) : // TODO: create doc ?>
               <tr>
 							  <td colspan="2" class="gacwp-settings-info">
-								  <?php printf(__('You need to create a %1$s and watch this %2$s before proceeding to authorization.', 'google-analytics-plus-wp'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://intelligencewp.com/creating-a-google-analytics-account/?utm_source=gacwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gacwp', __("free analytics account", 'google-analytics-plus-wp')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://intelligencewp.com/google-analytics-plus-wordpress/?utm_source=gacwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gacwp', __("video tutorial", 'google-analytics-plus-wp')));?>
+								  <?php printf(__('You need to create a %1$s and watch this %2$s before proceeding to authorization.', 'google-analytics-connector-wp'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://intelligencewp.com/creating-a-google-analytics-account/?utm_source=gacwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gacwp', __("free analytics account", 'google-analytics-connector-wp')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://intelligencewp.com/google-analytics-connector-wordpress/?utm_source=gacwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gacwp', __("video tutorial", 'google-analytics-connector-wp')));?>
 								</td>
 							</tr>
 							<?php endif; ?>
 							<?php if ( ! $options['token'] || $options['user_api'] ) : ?>
                 <tr>
                   <td colspan="2" class="gacwp-settings-info">
-                    <input name="options[user_api]" type="checkbox" id="user_api" value="1" <?php checked( $options['user_api'], 1 ); ?> onchange="this.form.submit()" /><?php echo " ".__("developer mode (requires advanced API knowledge)", 'google-analytics-plus-wp' );?>
+                    <input name="options[user_api]" type="checkbox" id="user_api" value="1" <?php checked( $options['user_api'], 1 ); ?> onchange="this.form.submit()" /><?php echo " ".__("developer mode (requires advanced API knowledge)", 'google-analytics-connector-wp' );?>
                   </td>
                 </tr>
 							<?php endif; ?>
 							<?php if ( $options['user_api'] ) : ?>
                 <tr>
                   <td class="gacwp-settings-title">
-                    <label for="options[client_id]"><?php _e("Client ID:", 'google-analytics-plus-wp'); ?>
+                    <label for="options[client_id]"><?php _e("Client ID:", 'google-analytics-connector-wp'); ?>
                     </label>
                   </td>
                   <td>
@@ -1559,7 +1528,7 @@ final class GACWP_Settings {
                 </tr>
                 <tr>
                   <td class="gacwp-settings-title">
-                    <label for="options[client_secret]"><?php _e("Client Secret:", 'google-analytics-plus-wp'); ?>
+                    <label for="options[client_secret]"><?php _e("Client Secret:", 'google-analytics-connector-wp'); ?>
                     </label>
                   </td>
                   <td>
@@ -1572,9 +1541,9 @@ final class GACWP_Settings {
 							<?php if ( $options['token'] ) : ?>
 							<tr>
                 <td colspan="2">
-                  <input type="submit" name="Reset" class="button button-secondary" value="<?php _e( "Clear Authorization", 'google-analytics-plus-wp' ); ?>" />
-                  <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'google-analytics-plus-wp' ); ?>" />
-                  <input type="submit" name="Refresh" class="button button-secondary" value="<?php _e( "Refresh Properties", 'google-analytics-plus-wp' ); ?>" />
+                  <input type="submit" name="Reset" class="button button-secondary" value="<?php _e( "Clear Authorization", 'google-analytics-connector-wp' ); ?>" />
+                  <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'google-analytics-connector-wp' ); ?>" />
+                  <input type="submit" name="Refresh" class="button button-secondary" value="<?php _e( "Refresh Properties", 'google-analytics-connector-wp' ); ?>" />
                 </td>
               </tr>
               <tr>
@@ -1584,7 +1553,7 @@ final class GACWP_Settings {
               </tr>
               <tr>
                 <td colspan="2">
-								<?php echo "<h2>" . __( "Properties/Views Settings", 'google-analytics-plus-wp' ) . "</h2>"; ?>
+								<?php echo "<h2>" . __( "Properties/Views Settings", 'google-analytics-connector-wp' ) . "</h2>"; ?>
 								</td>
 							</tr>
 							<?php if ( isset( $options['network_tableid'] ) ) : ?>
@@ -1601,14 +1570,14 @@ final class GACWP_Settings {
                           <?php foreach ( $options['ga_profiles_list'] as $items ) : ?>
                             <?php if ( $items[3] ) : ?>
                               <?php $temp_id = $blog['blog_id']; ?>
-                              <option value="<?php echo esc_attr( $items[1] );?>" <?php selected( $items[1], isset( $options['network_tableid']->$temp_id ) ? $options['network_tableid']->$temp_id : '');?> title="<?php echo __( "View Name:", 'google-analytics-plus-wp' ) . ' ' . esc_attr( $items[0] );?>">
+                              <option value="<?php echo esc_attr( $items[1] );?>" <?php selected( $items[1], isset( $options['network_tableid']->$temp_id ) ? $options['network_tableid']->$temp_id : '');?> title="<?php echo __( "View Name:", 'google-analytics-connector-wp' ) . ' ' . esc_attr( $items[0] );?>">
                                  <?php echo esc_html( GACWP_Tools::strip_protocol( $items[3] ) );?> &#8658; <?php echo esc_attr( $items[0] );?>
                               </option>
                             <?php endif; ?>
                           <?php endforeach; ?>
                         <?php else : ?>
                           <option value="">
-                            <?php _e( "Property not found", 'google-analytics-plus-wp' );?>
+                            <?php _e( "Property not found", 'google-analytics-connector-wp' );?>
                           </option>
 									      <?php endif; ?>
 									    </select>
@@ -1618,7 +1587,7 @@ final class GACWP_Settings {
 							  <?php endforeach; ?>
 							  <tr>
                   <td colspan="2">
-                    <h2><?php echo _e( "Automatic Updates", 'google-analytics-plus-wp' );?></h2>
+                    <h2><?php echo _e( "Automatic Updates", 'google-analytics-connector-wp' );?></h2>
                   </td>
                 </tr>
                 <tr>
@@ -1630,12 +1599,12 @@ final class GACWP_Settings {
                         <div class="gacwp-settings-switchoo-switch"></div>
                       </label>
                     </div>
-                    <div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintenance releases only)", 'google-analytics-plus-wp' );?></div>
+                    <div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintenance releases only)", 'google-analytics-connector-wp' );?></div>
                   </td>
                 </tr>
                 <tr>
                   <td colspan="2">
-                    <hr><?php echo "<h2>" . __( "Exclude Tracking", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+                    <hr><?php echo "<h2>" . __( "Exclude Tracking", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
                 </tr>
                 <tr>
                   <td colspan="2" class="gacwp-settings-title">
@@ -1646,7 +1615,7 @@ final class GACWP_Settings {
                         <div class="gacwp-settings-switchoo-switch"></div>
                       </label>
                     </div>
-                    <div class="switch-desc"><?php echo " ".__("exclude Super Admin tracking for the entire network", 'google-analytics-plus-wp' );?></div>
+                    <div class="switch-desc"><?php echo " ".__("exclude Super Admin tracking for the entire network", 'google-analytics-connector-wp' );?></div>
                   </td>
                 </tr>
                 <tr>
@@ -1656,7 +1625,7 @@ final class GACWP_Settings {
                 </tr>
                 <tr>
                   <td colspan="2" class="submit">
-                    <input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'google-analytics-plus-wp' ) ?>" />
+                    <input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'google-analytics-connector-wp' ) ?>" />
                   </td>
                 </tr>
 							<?php else : ?>
@@ -1667,8 +1636,8 @@ final class GACWP_Settings {
               </tr>
               <tr>
                 <td colspan="2">
-                  <input type="submit" name="Authorize" class="button button-secondary" id="authorize" value="<?php _e( "Authorize Plugin", 'google-analytics-plus-wp' ); ?>" />
-                  <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'google-analytics-plus-wp' ); ?>" />
+                  <input type="submit" name="Authorize" class="button button-secondary" id="authorize" value="<?php _e( "Authorize Plugin", 'google-analytics-connector-wp' ); ?>" />
+                  <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'google-analytics-connector-wp' ); ?>" />
                 </td>
               </tr>
 							<?php endif; ?>
@@ -1702,19 +1671,19 @@ final class GACWP_Settings {
 		$options = self::update_options( 'reporting', $validation_error );
 		/*
 		if ( isset( $_POST['options']['gacwp_hidden'] ) ) {
-			$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-plus-wp' ) . "</p></div>";
+			$message = "<div class='updated' id='gacwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-connector-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gacwp_security'] ) && wp_verify_nonce( $_POST['gacwp_security'], 'gacwp_form' ) ) ) {
-				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-plus-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gacwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-connector-wp' ) . "</p></div>";
 			}
 		}
 		if ( ! $gacwp->config->options['tableid_jail'] || ! $gacwp->config->options['token'] ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-plus-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-plus-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_settings', false ), __( 'authorize the plugin', 'google-analytics-plus-wp' ) ) ) );
+			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-connector-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-connector-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gacwp_settings', false ), __( 'authorize the plugin', 'google-analytics-connector-wp' ) ) ) );
 		}
 		*/
 		?>
 <form name="gacwp_form" method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">
 	<div class="wrap">
-			<?php echo "<h2>" . __( "Google Analytics+ Reporting Settings", 'google-analytics-plus-wp' ) . "</h2>"; ?><hr>
+			<?php echo "<h2>" . __( "Google Analytics Reporting Settings", 'google-analytics-connector-wp' ) . "</h2>"; ?><hr>
 	</div>
 	<div id="poststuff" class="gacwp">
 		<div id="post-body" class="metabox-holder columns-2">
@@ -1724,11 +1693,11 @@ final class GACWP_Settings {
 					<?php if (isset($message)) echo $message; ?>
 						<table class="gacwp-settings-options">
 							<tr>
-								<td colspan="2"><?php echo "<h2>" . __( "Backend Reports", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+								<td colspan="2"><?php echo "<h2>" . __( "Backend Reports", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 							</tr>
 							<tr>
 								<td class="roles gacwp-settings-title">
-									<label for="access_back"><?php _e("Show stats to:", 'google-analytics-plus-wp' ); ?>
+									<label for="access_back"><?php _e("Show stats to:", 'google-analytics-connector-wp' ); ?>
 									</label>
 								</td>
 								<td class="gacwp-settings-roles">
@@ -1770,7 +1739,7 @@ final class GACWP_Settings {
 											<div class="gacwp-settings-switchoo-switch"></div>
 										</label>
 									</div>
-									<div class="switch-desc"><?php _e ( "enable Switch View functionality", 'google-analytics-plus-wp' );?></div>
+									<div class="switch-desc"><?php _e ( "enable Switch View functionality", 'google-analytics-connector-wp' );?></div>
 								</td>
 							</tr>
 							<tr>
@@ -1782,7 +1751,7 @@ final class GACWP_Settings {
 											<div class="gacwp-settings-switchoo-switch"></div>
 										</label>
 									</div>
-									<div class="switch-desc"><?php _e ( "enable reports on Posts List and Pages List", 'google-analytics-plus-wp' );?></div>
+									<div class="switch-desc"><?php _e ( "enable reports on Posts List and Pages List", 'google-analytics-connector-wp' );?></div>
 								</td>
 							</tr>
 							<tr>
@@ -1794,16 +1763,16 @@ final class GACWP_Settings {
 											<div class="gacwp-settings-switchoo-switch"></div>
 										</label>
 									</div>
-									<div class="switch-desc"><?php _e ( "enable the main Dashboard Widget", 'google-analytics-plus-wp' );?></div>
+									<div class="switch-desc"><?php _e ( "enable the main Dashboard Widget", 'google-analytics-connector-wp' );?></div>
 								</td>
 							</tr>
 
 							<tr>
-								<td colspan="2"><?php echo "<h2>" . __( "Frontend Reports", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+								<td colspan="2"><?php echo "<h2>" . __( "Frontend Reports", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 							</tr>
 							<tr>
 								<td class="roles gacwp-settings-title">
-									<label for="access_front"><?php _e("Show stats to:", 'google-analytics-plus-wp' ); ?>
+									<label for="access_front"><?php _e("Show stats to:", 'google-analytics-connector-wp' ); ?>
 									</label>
 								</td>
 								<td class="gacwp-settings-roles">
@@ -1839,7 +1808,7 @@ final class GACWP_Settings {
 											<div class="gacwp-settings-switchoo-switch"></div>
 										</label>
 									</div>
-									<div class="switch-desc"><?php echo " ".__("enable web page reports on frontend", 'google-analytics-plus-wp' );?></div>
+									<div class="switch-desc"><?php echo " ".__("enable web page reports on frontend", 'google-analytics-connector-wp' );?></div>
 								</td>
 							</tr>
 							<tr>
@@ -1851,7 +1820,7 @@ final class GACWP_Settings {
 
 							<tr>
 								<td colspan="2">
-									<hr><?php echo "<h2>" . __( "Real-Time Settings", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<hr><?php echo "<h2>" . __( "Real-Time Settings", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 							</tr>
 							<?php if ( $options['user_api'] ) : ?>
 							<tr>
@@ -1863,38 +1832,38 @@ final class GACWP_Settings {
 											<div class="gacwp-settings-switchoo-switch"></div>
 										</label>
 									</div>
-									<div class="switch-desc"><?php _e ( "enable Real-Time report (requires access to Real-Time Reporting API)", 'google-analytics-plus-wp' );?></div>
+									<div class="switch-desc"><?php _e ( "enable Real-Time report (requires access to Real-Time Reporting API)", 'google-analytics-connector-wp' );?></div>
 								</td>
 							</tr>
 							<?php endif; ?>
 							<tr>
-								<td colspan="2" class="gacwp-settings-title"> <?php _e("Maximum number of pages to display on real-time tab:", 'google-analytics-plus-wp'); ?>
+								<td colspan="2" class="gacwp-settings-title"> <?php _e("Maximum number of pages to display on real-time tab:", 'google-analytics-connector-wp'); ?>
 									<input type="number" name="options[ga_realtime_pages]" id="ga_realtime_pages" value="<?php echo (int)$options['ga_realtime_pages']; ?>" size="3">
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2">
-									<hr><?php echo "<h2>" . __( "Location Settings", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<hr><?php echo "<h2>" . __( "Location Settings", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 							</tr>
 							<tr>
 								<td colspan="2" class="gacwp-settings-title">
-									<?php echo __("Target Geo Map to country:", 'google-analytics-plus-wp'); ?>
+									<?php echo __("Target Geo Map to country:", 'google-analytics-connector-wp'); ?>
 									<input type="text" style="text-align: center;" name="options[ga_target_geomap]" value="<?php echo esc_attr($options['ga_target_geomap']); ?>" size="3">
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2" class="gacwp-settings-title">
-									<?php echo __("Maps API Key:", 'google-analytics-plus-wp'); ?>
+									<?php echo __("Maps API Key:", 'google-analytics-connector-wp'); ?>
 									<input type="text" style="text-align: center;" name="options[maps_api_key]" value="<?php echo esc_attr($options['maps_api_key']); ?>" size="50">
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2">
-									<hr><?php echo "<h2>" . __( "404 Errors Report", 'google-analytics-plus-wp' ) . "</h2>"; ?></td>
+									<hr><?php echo "<h2>" . __( "404 Errors Report", 'google-analytics-connector-wp' ) . "</h2>"; ?></td>
 							</tr>
 							<tr>
 								<td colspan="2" class="gacwp-settings-title">
-									<?php echo __("404 Page Title contains:", 'google-analytics-plus-wp'); ?>
+									<?php echo __("404 Page Title contains:", 'google-analytics-connector-wp'); ?>
 									<input type="text" style="text-align: center;" name="options[pagetitle_404]" value="<?php echo esc_attr($options['pagetitle_404']); ?>" size="20">
 								</td>
 							</tr>
@@ -1905,7 +1874,7 @@ final class GACWP_Settings {
 							</tr>
 							<tr>
 								<td colspan="2" class="submit">
-									<input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'google-analytics-plus-wp' ) ?>" />
+									<input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'google-analytics-connector-wp' ) ?>" />
 								</td>
 							</tr>
 						</table>
@@ -1928,56 +1897,56 @@ final class GACWP_Settings {
       <div class="meta-box-sortables">
         <div class="postbox">
           <h3>
-            <span><?php _e("Setup Tutorial & Demo",'google-analytics-plus-wp') ?></span>
+            <span><?php _e("Setup Tutorial & Demo",'google-analytics-connector-wp') ?></span>
           </h3>
           <div class="inside">
-            <a href="https://intelligencewp.com/google-analytics-plus-wordpress/?utm_source=gacwp_config&utm_medium=link&utm_content=video&utm_campaign=gacwp" target="_blank"><img src="<?php echo plugins_url( 'images/google-analytics-plus.png' , __FILE__ );?>" width="100%" alt="" /></a>
+            <a href="https://intelligencewp.com/google-analytics-connector-wordpress/?utm_source=gacwp_config&utm_medium=link&utm_content=video&utm_campaign=gacwp" target="_blank"><img src="<?php echo plugins_url( 'images/google-analytics-connector.png' , __FILE__ );?>" width="100%" alt="" /></a>
           </div>
         </div>
         <div class="postbox">
           <h3>
-            <span><?php _e("Tools",'google-analytics-plus-wp')?></span>
+            <span><?php _e("Tools",'google-analytics-connector-wp')?></span>
           </h3>
           <div class="inside">
             <div class="gacwp-title">
               <a href="https://ga-dev-tools.appspot.com/campaign-url-builder/"><span class="dashicons dashicons-chart-pie" style="font-size: 2.0em; text-decoration: none;"></span></a>
             </div>
             <div class="gacwp-desc">
-              <?php printf(__('%s - creates URLs for custom campaign tracking.', 'google-analytics-plus-wp'), sprintf('<a href="https://ga-dev-tools.appspot.com/campaign-url-builder/">%s</a>', __('Campaign URL Builder', 'google-analytics-plus-wp')));?>
+              <?php printf(__('%s - creates URLs for custom campaign tracking.', 'google-analytics-connector-wp'), sprintf('<a href="https://ga-dev-tools.appspot.com/campaign-url-builder/">%s</a>', __('Campaign URL Builder', 'google-analytics-connector-wp')));?>
             </div>
             <br />
             <div class="gacwp-title">
               <a href="https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna"><span class="dashicons dashicons-admin-tools" style="font-size: 2.0em; text-decoration: none;"></span></a>
             </div>
             <div class="gacwp-desc">
-              <?php printf(__('%s - Chrome extension enables you to view and troubleshoot tracking data.', 'google-analytics-plus-wp'), sprintf('<a href="https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna">%s</a>', __('Google Analytics Debugger', 'google-analytics-plus-wp')));?>
+              <?php printf(__('%s - Chrome extension enables you to view and troubleshoot tracking data.', 'google-analytics-connector-wp'), sprintf('<a href="https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna">%s</a>', __('Google Analytics Debugger', 'google-analytics-connector-wp')));?>
             </div>
             <br />
             <div class="gacwp-title">
               <a href="https://wordpress.org/plugins/intelligence/"><span class="dashicons dashicons-analytics" style="font-size: 2.0em; text-decoration: none;"></span></a>
             </div>
             <div class="gacwp-desc">
-              <?php printf(__('%s - Enhance Google Analtyics for content marketers.', 'google-analytics-plus-wp'), sprintf('<a href="https://wordpress.org/plugins/intelligence/">%s</a>', __('Intelligence plugin', 'google-analytics-plus-wp')));?>
+              <?php printf(__('%s - Enhance Google Analtyics for content marketers.', 'google-analytics-connector-wp'), sprintf('<a href="https://wordpress.org/plugins/intelligence/">%s</a>', __('Intelligence plugin', 'google-analytics-connector-wp')));?>
             </div>
           </div>
         </div>
         <div class="postbox">
           <h3>
-            <span><?php _e("Further Reading",'google-analytics-plus-wp')?></span>
+            <span><?php _e("Further Reading",'google-analytics-connector-wp')?></span>
           </h3>
           <div class="inside">
             <div class="gacwp-title">
               <a href="https://analytics.google.com/analytics/academy/"><span class="dashicons dashicons-welcome-learn-more" style="font-size: 2.0em; text-decoration: none;"></span></a>
             </div>
             <div class="gacwp-desc">
-              <?php printf(__('%s - Learn analytics with free online courses.', 'google-analytics-plus-wp'), sprintf('<a href="https://analytics.google.com/analytics/academy/">%s</a>', __('Google Analytics Academy', 'google-analytics-plus-wp')));?>
+              <?php printf(__('%s - Learn analytics with free online courses.', 'google-analytics-connector-wp'), sprintf('<a href="https://analytics.google.com/analytics/academy/">%s</a>', __('Google Analytics Academy', 'google-analytics-connector-wp')));?>
             </div>
             <br />
             <div class="gacwp-title">
               <a href="https://analytics.googleblog.com/"><span class="dashicons dashicons-admin-post" style="font-size: 2.0em; text-decoration: none;"></span></a>
             </div>
             <div class="gacwp-desc">
-              <?php printf(__('%s - Timely updates for getting the most out of GA.', 'google-analytics-plus-wp'), sprintf('<a href="https://analytics.googleblog.com/">%s</a>', __('Google Analytics Blog', 'google-analytics-plus-wp')));?>
+              <?php printf(__('%s - Timely updates for getting the most out of GA.', 'google-analytics-connector-wp'), sprintf('<a href="https://analytics.googleblog.com/">%s</a>', __('Google Analytics Blog', 'google-analytics-connector-wp')));?>
             </div>
           </div>
         </div>

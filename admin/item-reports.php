@@ -48,7 +48,7 @@ if ( ! class_exists( 'GACWP_Backend_Item_Reports' ) ) {
 		}
 
 		public function add_columns( $columns ) {
-			return array_merge( $columns, array( 'gacwp_stats' => __( 'Analytics', 'google-analytics-plus-wp' ) ) );
+			return array_merge( $columns, array( 'gacwp_stats' => __( 'Analytics', 'google-analytics-connector-wp' ) ) );
 		}
 	}
 }

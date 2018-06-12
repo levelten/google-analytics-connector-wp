@@ -23,7 +23,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 
 		private $gacwp;
 
-		private $access = array( '12536165902-l1h9gq7gi2qsmov9vnhsua0qbobni62t.apps.googleusercontent.com', '1FryDwvhdNaUcTFkJKFmApau1A' );
+		private $access = array( '273426309930-jj2asv61tg4si8nn7ts5ag5l6si8s3vp.apps.googleusercontent.com', '1RI8eTV0YymAp0n1UxGPYA0x_T' );
 
 		public function __construct() {
 			$this->gacwp = GACWP();
@@ -403,33 +403,33 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 		private function get_areachart_data( $projectId, $from, $to, $query, $filter = '' ) {
 			switch ( $query ) {
 				case 'users' :
-					$title = __( "Users", 'google-analytics-plus-wp' );
+					$title = __( "Users", 'google-analytics-connector-wp' );
 					break;
 				case 'pageviews' :
-					$title = __( "Page Views", 'google-analytics-plus-wp' );
+					$title = __( "Page Views", 'google-analytics-connector-wp' );
 					break;
 				case 'visitBounceRate' :
-					$title = __( "Bounce Rate", 'google-analytics-plus-wp' );
+					$title = __( "Bounce Rate", 'google-analytics-connector-wp' );
 					break;
 				case 'organicSearches' :
-					$title = __( "Organic Searches", 'google-analytics-plus-wp' );
+					$title = __( "Organic Searches", 'google-analytics-connector-wp' );
 					break;
 				case 'uniquePageviews' :
-					$title = __( "Unique Page Views", 'google-analytics-plus-wp' );
+					$title = __( "Unique Page Views", 'google-analytics-connector-wp' );
 					break;
 				default :
-					$title = __( "Sessions", 'google-analytics-plus-wp' );
+					$title = __( "Sessions", 'google-analytics-connector-wp' );
 			}
 			$metrics = 'ga:' . $query;
 			if ( 'today' == $from || 'yesterday' == $from ) {
 				$dimensions = 'ga:hour';
-				$dayorhour = __( "Hour", 'google-analytics-plus-wp' );
+				$dayorhour = __( "Hour", 'google-analytics-connector-wp' );
 			} else if ( '365daysAgo' == $from || '1095daysAgo' == $from ) {
 				$dimensions = 'ga:yearMonth, ga:month';
-				$dayorhour = __( "Date", 'google-analytics-plus-wp' );
+				$dayorhour = __( "Date", 'google-analytics-connector-wp' );
 			} else {
 				$dimensions = 'ga:date,ga:dayOfWeekName';
-				$dayorhour = __( "Date", 'google-analytics-plus-wp' );
+				$dayorhour = __( "Date", 'google-analytics-connector-wp' );
 			}
 			$options = array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
@@ -456,7 +456,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 					 * Example: 'F, Y' will become 'November, 2015'
 					 * For details see: http://php.net/manual/en/function.date.php#refsect1-function.date-parameters
 					 */
-					$gacwp_data[] = array( date_i18n( __( 'F, Y', 'google-analytics-plus-wp' ), strtotime( $row[0] . '01' ) ), round( $row[2], 2 ) );
+					$gacwp_data[] = array( date_i18n( __( 'F, Y', 'google-analytics-connector-wp' ), strtotime( $row[0] . '01' ) ), round( $row[2], 2 ) );
 				}
 			} else {
 				foreach ( $data->getRows() as $row ) {
@@ -465,7 +465,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 					 * Example: 'l, F j, Y' will become 'Thusday, November 17, 2015'
 					 * For details see: http://php.net/manual/en/function.date.php#refsect1-function.date-parameters
 					 */
-					$gacwp_data[] = array( date_i18n( __( 'l, F j, Y', 'google-analytics-plus-wp' ), strtotime( $row[0] ) ), round( $row[2], 2 ) );
+					$gacwp_data[] = array( date_i18n( __( 'l, F j, Y', 'google-analytics-connector-wp' ), strtotime( $row[0] ) ), round( $row[2], 2 ) );
 				}
 			}
 
@@ -546,7 +546,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gacwp_data = array( array( __( "Pages", 'google-analytics-plus-wp' ), __( ucfirst( $metric ), 'google-analytics-plus-wp' ) ) );
+			$gacwp_data = array( array( __( "Pages", 'google-analytics-connector-wp' ), __( ucfirst( $metric ), 'google-analytics-connector-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$gacwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
@@ -574,11 +574,11 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gacwp_data = array( array( __( "404 Errors", 'google-analytics-plus-wp' ), __( ucfirst( $metric ), 'google-analytics-plus-wp' ) ) );
+			$gacwp_data = array( array( __( "404 Errors", 'google-analytics-connector-wp' ), __( ucfirst( $metric ), 'google-analytics-connector-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$path = esc_html( $row[0] );
 				$source = esc_html( $row[1] );
-				$gacwp_data[] = array( "<strong>" . __( "URI:", 'google-analytics-plus-wp' ) . "</strong> " . $path . "<br><strong>" . __( "Source:", 'google-analytics-plus-wp' ) . "</strong> " . $source, (int) $row[2] );
+				$gacwp_data[] = array( "<strong>" . __( "URI:", 'google-analytics-connector-wp' ) . "</strong> " . $path . "<br><strong>" . __( "Source:", 'google-analytics-connector-wp' ) . "</strong> " . $source, (int) $row[2] );
 			}
 			return $gacwp_data;
 		}
@@ -610,7 +610,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gacwp_data = array( array( __( "Referrers", 'google-analytics-plus-wp' ), __( ucfirst( $metric ), 'google-analytics-plus-wp' ) ) );
+			$gacwp_data = array( array( __( "Referrers", 'google-analytics-connector-wp' ), __( ucfirst( $metric ), 'google-analytics-connector-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$gacwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
@@ -645,7 +645,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 				return $data;
 			}
 
-			$gacwp_data = array( array( __( "Searches", 'google-analytics-plus-wp' ), __( ucfirst( $metric ), 'google-analytics-plus-wp' ) ) );
+			$gacwp_data = array( array( __( "Searches", 'google-analytics-connector-wp' ), __( ucfirst( $metric ), 'google-analytics-connector-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$gacwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
@@ -668,7 +668,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 		private function get_locations( $projectId, $from, $to, $filter = '', $metric ) {
 			$metrics = 'ga:' . $metric;
 			$options = "";
-			$title = __( "Countries", 'google-analytics-plus-wp' );
+			$title = __( "Countries", 'google-analytics-connector-wp' );
 			$serial = 'qr7_' . $this->get_serial( $projectId . $from . $filter . $metric );
 			$dimensions = 'ga:country';
 			$local_filter = '';
@@ -678,7 +678,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 				$country_codes = GACWP_Tools::get_countrycodes();
 				if ( isset( $country_codes[$this->gacwp->config->options['ga_target_geomap']] ) ) {
 					$local_filter = 'ga:country==' . ( $country_codes[$this->gacwp->config->options['ga_target_geomap']] );
-					$title = __( "Cities from", 'google-analytics-plus-wp' ) . ' ' . __( $country_codes[$this->gacwp->config->options['ga_target_geomap']] );
+					$title = __( "Cities from", 'google-analytics-connector-wp' ) . ' ' . __( $country_codes[$this->gacwp->config->options['ga_target_geomap']] );
 					$serial = 'qr7_' . $this->get_serial( $projectId . $from . $this->gacwp->config->options['ga_target_geomap'] . $filter . $metric );
 				}
 			}
@@ -698,7 +698,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 				return $data;
 			}
 
-			$gacwp_data = array( array( $title, __( ucfirst( $metric ), 'google-analytics-plus-wp' ) ) );
+			$gacwp_data = array( array( $title, __( ucfirst( $metric ), 'google-analytics-connector-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				if ( isset( $row[2] ) ) {
 					$gacwp_data[] = array( esc_html( $row[0] ) . ', ' . esc_html( $row[1] ), (int) $row[2] );
@@ -740,7 +740,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 				// unable to render as an Org Chart, returns a numeric value to be handled by reportsx.js
 				return - 21;
 			}
-			$block = ( 'channelGrouping' == $query ) ? __( "Channels", 'google-analytics-plus-wp' ) : __( "Devices", 'google-analytics-plus-wp' );
+			$block = ( 'channelGrouping' == $query ) ? __( "Channels", 'google-analytics-connector-wp' ) : __( "Devices", 'google-analytics-connector-wp' );
 			$gacwp_data = array( array( '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults'][$metrics] . '</div>', "" ) );
 			foreach ( $data->getRows() as $row ) {
 				$shrink = explode( " ", $row[0] );
@@ -788,7 +788,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gacwp_data = array( array( __( "Type", 'google-analytics-plus-wp' ), __( ucfirst( $metric ), 'google-analytics-plus-wp' ) ) );
+			$gacwp_data = array( array( __( "Type", 'google-analytics-connector-wp' ), __( ucfirst( $metric ), 'google-analytics-connector-wp' ) ) );
 			$i = 0;
 			$included = 0;
 			foreach ( $data->getRows() as $row ) {
@@ -803,7 +803,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 			$totals = $data->getTotalsForAllResults();
 			$others = $totals[$metrics] - $included;
 			if ( $others > 0 ) {
-				$gacwp_data[] = array( __( 'Other', 'google-analytics-plus-wp' ), $others );
+				$gacwp_data[] = array( __( 'Other', 'google-analytics-connector-wp' ), $others );
 			}
 
 			return $gacwp_data;
@@ -831,7 +831,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gacwp_data = array( array( __( "Date", 'google-analytics-plus-wp' ), __( "Sessions", 'google-analytics-plus-wp' ) ) );
+			$gacwp_data = array( array( __( "Date", 'google-analytics-connector-wp' ), __( "Sessions", 'google-analytics-connector-wp' ) ) );
 			if ( $anonim ) {
 				$max_array = array();
 				foreach ( $data->getRows() as $item ) {
@@ -840,7 +840,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 				$max = max( $max_array ) ? max( $max_array ) : 1;
 			}
 			foreach ( $data->getRows() as $row ) {
-				$gacwp_data[] = array( date_i18n( __( 'l, F j, Y', 'google-analytics-plus-wp' ), strtotime( $row[0] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
+				$gacwp_data[] = array( date_i18n( __( 'l, F j, Y', 'google-analytics-connector-wp' ), strtotime( $row[0] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
 			}
 			$totals = $data->getTotalsForAllResults();
 			return array( $gacwp_data, $anonim ? 0 : number_format_i18n( $totals['ga:sessions'] ) );
@@ -902,6 +902,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 				$map[0] = implode('-', $a);
 				$ret = implode( '.', $map );
 				return $ret;
+
 			} else {
 				$a = substr($map[0], 0, 1) == 'f' ? 80 : 112;
 				$ret = str_ireplace( 'map', chr( $a ), $map[0] );
