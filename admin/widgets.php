@@ -9,43 +9,43 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-if ( ! class_exists( 'GAPWP_Backend_Widgets' ) ) {
+if ( ! class_exists( 'GACWP_Backend_Widgets' ) ) {
 
-	class GAPWP_Backend_Widgets {
+	class GACWP_Backend_Widgets {
 
-		private $gapwp;
+		private $gacwp;
 
 		public function __construct() {
-			$this->gapwp = GAPWP();
-			if ( GAPWP_Tools::check_roles( $this->gapwp->config->options['access_back'] ) && ( 1 == $this->gapwp->config->options['dashboard_widget'] ) ) {
+			$this->gacwp = GACWP();
+			if ( GACWP_Tools::check_roles( $this->gacwp->config->options['access_back'] ) && ( 1 == $this->gacwp->config->options['dashboard_widget'] ) ) {
 				add_action( 'wp_dashboard_setup', array( $this, 'add_widget' ) );
 			}
 		}
 
 		public function add_widget() {
-			wp_add_dashboard_widget( 'gapwp-widget', __( "Google Analytics+", 'google-analytics-plus-wp' ), array( $this, 'dashboard_widget' ), $control_callback = null );
+			wp_add_dashboard_widget( 'gacwp-widget', __( "Google Analytics+", 'google-analytics-plus-wp' ), array( $this, 'dashboard_widget' ), $control_callback = null );
 		}
 
 		public function dashboard_widget() {
 			$projectId = 0;
 			
-			if ( empty( $this->gapwp->config->options['token'] ) ) {
-				echo '<p>' . __( "This plugin needs an authorization:", 'google-analytics-plus-wp' ) . '</p><form action="' . menu_page_url( 'gapwp_settings', false ) . '" method="POST">' . get_submit_button( __( "Authorize Plugin", 'google-analytics-plus-wp' ), 'secondary' ) . '</form>';
+			if ( empty( $this->gacwp->config->options['token'] ) ) {
+				echo '<p>' . __( "This plugin needs an authorization:", 'google-analytics-plus-wp' ) . '</p><form action="' . menu_page_url( 'gacwp_settings', false ) . '" method="POST">' . get_submit_button( __( "Authorize Plugin", 'google-analytics-plus-wp' ), 'secondary' ) . '</form>';
 				return;
 			}
 			
 			if ( current_user_can( 'manage_options' ) ) {
-				if ( $this->gapwp->config->options['tableid_jail'] ) {
-					$projectId = $this->gapwp->config->options['tableid_jail'];
+				if ( $this->gacwp->config->options['tableid_jail'] ) {
+					$projectId = $this->gacwp->config->options['tableid_jail'];
 				} else {
-					echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'google-analytics-plus-wp' ) . '</p><form action="' . menu_page_url( 'gapwp_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'google-analytics-plus-wp' ), 'secondary' ) . '</form>';
+					echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'google-analytics-plus-wp' ) . '</p><form action="' . menu_page_url( 'gacwp_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'google-analytics-plus-wp' ), 'secondary' ) . '</form>';
 					return;
 				}
 			} else {
-				if ( $this->gapwp->config->options['tableid_jail'] ) {
-					$projectId = $this->gapwp->config->options['tableid_jail'];
+				if ( $this->gacwp->config->options['tableid_jail'] ) {
+					$projectId = $this->gacwp->config->options['tableid_jail'];
 				} else {
-					echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'google-analytics-plus-wp' ) . '</p><form action="' . menu_page_url( 'gapwp_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'google-analytics-plus-wp' ), 'secondary' ) . '</form>';
+					echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'google-analytics-plus-wp' ) . '</p><form action="' . menu_page_url( 'gacwp_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'google-analytics-plus-wp' ), 'secondary' ) . '</form>';
 					return;
 				}
 			}
@@ -58,7 +58,7 @@ if ( ! class_exists( 'GAPWP_Backend_Widgets' ) ) {
 			}
 			
 			?>
-<div id="gapwp-window-1"></div>
+<div id="gacwp-window-1"></div>
 <?php
 		}
 	}

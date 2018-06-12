@@ -13,14 +13,14 @@ if ( ! class_exists( 'GAPWP_Frontend_Ajax' ) ) {
 
 	final class GAPWP_Frontend_Ajax {
 
-		private $gapwp;
+		private $gacwp;
 
 		public function __construct() {
-			$this->gapwp = GAPWP();
+			$this->gacwp = GAPWP();
 
-			if ( GAPWP_Tools::check_roles( $this->gapwp->config->options['access_front'] ) && $this->gapwp->config->options['frontend_item_reports'] ) {
+			if ( GAPWP_Tools::check_roles( $this->gacwp->config->options['access_front'] ) && $this->gacwp->config->options['frontend_item_reports'] ) {
 				// Item Reports action
-				add_action( 'wp_ajax_gapwp_frontend_item_reports', array( $this, 'ajax_item_reports' ) );
+				add_action( 'wp_ajax_gacwp_frontend_item_reports', array( $this, 'ajax_item_reports' ) );
 			}
 
 			// Frontend Widget actions
@@ -34,7 +34,7 @@ if ( ! class_exists( 'GAPWP_Frontend_Ajax' ) ) {
 		 * @return string|int
 		 */
 		public function ajax_item_reports() {
-			if ( ! isset( $_POST['gapwp_security_frontend_item_reports'] ) || ! wp_verify_nonce( $_POST['gapwp_security_frontend_item_reports'], 'gapwp_frontend_item_reports' ) ) {
+			if ( ! isset( $_POST['gacwp_security_frontend_item_reports'] ) || ! wp_verify_nonce( $_POST['gacwp_security_frontend_item_reports'], 'gacwp_frontend_item_reports' ) ) {
 				wp_die( - 30 );
 			}
 
@@ -53,36 +53,36 @@ if ( ! class_exists( 'GAPWP_Frontend_Ajax' ) ) {
 				ob_clean();
 			}
 
-			if ( ! GAPWP_Tools::check_roles( $this->gapwp->config->options['access_front'] ) || 0 == $this->gapwp->config->options['frontend_item_reports'] ) {
+			if ( ! GAPWP_Tools::check_roles( $this->gacwp->config->options['access_front'] ) || 0 == $this->gacwp->config->options['frontend_item_reports'] ) {
 				wp_die( - 31 );
 			}
 
-			if ( $this->gapwp->config->options['token'] && $this->gapwp->config->options['tableid_jail'] ) {
-				if ( null === $this->gapwp->gapi_controller ) {
-					$this->gapwp->gapi_controller = new GAPWP_GAPI_Controller();
+			if ( $this->gacwp->config->options['token'] && $this->gacwp->config->options['tableid_jail'] ) {
+				if ( null === $this->gacwp->gapi_controller ) {
+					$this->gacwp->gapi_controller = new GAPWP_GAPI_Controller();
 				}
 			} else {
 				wp_die( - 24 );
 			}
 
-			if ( $this->gapwp->config->options['tableid_jail'] ) {
-				$projectId = $this->gapwp->config->options['tableid_jail'];
+			if ( $this->gacwp->config->options['tableid_jail'] ) {
+				$projectId = $this->gacwp->config->options['tableid_jail'];
 			} else {
 				wp_die( - 26 );
 			}
 
-			$profile_info = GAPWP_Tools::get_selected_profile( $this->gapwp->config->options['ga_profiles_list'], $projectId );
+			$profile_info = GAPWP_Tools::get_selected_profile( $this->gacwp->config->options['ga_profiles_list'], $projectId );
 
 			if ( isset( $profile_info[4] ) ) {
-				$this->gapwp->gapi_controller->timeshift = $profile_info[4];
+				$this->gacwp->gapi_controller->timeshift = $profile_info[4];
 			} else {
-				$this->gapwp->gapi_controller->timeshift = (int) current_time( 'timestamp' ) - time();
+				$this->gacwp->gapi_controller->timeshift = (int) current_time( 'timestamp' ) - time();
 			}
 
 			$uri = '/' . ltrim( $uri, '/' );
 
 			// allow URL correction before sending an API request
-			$filter = apply_filters( 'gapwp_frontenditem_uri', $uri );
+			$filter = apply_filters( 'gacwp_frontenditem_uri', $uri );
 
 			$lastchar = substr( $filter, - 1 );
 
@@ -98,7 +98,7 @@ if ( ! class_exists( 'GAPWP_Frontend_Ajax' ) ) {
 			$results = array();
 
 			foreach ( $queries as $value ) {
-				$results[] = $this->gapwp->gapi_controller->get( $projectId, $value, $from, $to, $filter, $metric );
+				$results[] = $this->gacwp->gapi_controller->get( $projectId, $value, $from, $to, $filter, $metric );
 			}
 
 			wp_send_json( $results );
@@ -110,11 +110,11 @@ if ( ! class_exists( 'GAPWP_Frontend_Ajax' ) ) {
 		 * @return string|int
 		 */
 		public function ajax_frontend_widget() {
-			if ( ! isset( $_POST['gapwp_number'] ) || ! isset( $_POST['gapwp_optionname'] ) || ! is_active_widget( false, false, 'gapwp-frontwidget-report' ) ) {
+			if ( ! isset( $_POST['gacwp_number'] ) || ! isset( $_POST['gacwp_optionname'] ) || ! is_active_widget( false, false, 'gacwp-frontwidget-report' ) ) {
 				wp_die( - 30 );
 			}
-			$widget_index = $_POST['gapwp_number'];
-			$option_name = $_POST['gapwp_optionname'];
+			$widget_index = $_POST['gacwp_number'];
+			$option_name = $_POST['gacwp_optionname'];
 			$options = get_option( $option_name );
 			if ( isset( $options[$widget_index] ) ) {
 				$instance = $options[$widget_index];
@@ -135,21 +135,21 @@ if ( ! class_exists( 'GAPWP_Frontend_Ajax' ) ) {
 			if ( ob_get_length() ) {
 				ob_clean();
 			}
-			if ( $this->gapwp->config->options['token'] && $this->gapwp->config->options['tableid_jail'] ) {
-				if ( null === $this->gapwp->gapi_controller ) {
-					$this->gapwp->gapi_controller = new GAPWP_GAPI_Controller();
+			if ( $this->gacwp->config->options['token'] && $this->gacwp->config->options['tableid_jail'] ) {
+				if ( null === $this->gacwp->gapi_controller ) {
+					$this->gacwp->gapi_controller = new GAPWP_GAPI_Controller();
 				}
 			} else {
 				wp_die( - 24 );
 			}
-			$projectId = $this->gapwp->config->options['tableid_jail'];
-			$profile_info = GAPWP_Tools::get_selected_profile( $this->gapwp->config->options['ga_profiles_list'], $projectId );
+			$projectId = $this->gacwp->config->options['tableid_jail'];
+			$profile_info = GAPWP_Tools::get_selected_profile( $this->gacwp->config->options['ga_profiles_list'], $projectId );
 			if ( isset( $profile_info[4] ) ) {
-				$this->gapwp->gapi_controller->timeshift = $profile_info[4];
+				$this->gacwp->gapi_controller->timeshift = $profile_info[4];
 			} else {
-				$this->gapwp->gapi_controller->timeshift = (int) current_time( 'timestamp' ) - time();
+				$this->gacwp->gapi_controller->timeshift = (int) current_time( 'timestamp' ) - time();
 			}
-			wp_send_json( $this->gapwp->gapi_controller->frontend_widget_stats( $projectId, $period, (int) $instance['anonim'] ) );
+			wp_send_json( $this->gacwp->gapi_controller->frontend_widget_stats( $projectId, $period, (int) $instance['anonim'] ) );
 		}
 	}
 }

@@ -167,8 +167,8 @@ Google Analytics+ for WP it's released under the GPLv2, you can use it free of c
 * Bug Fixes:	
 	* fixes for user opt-out feature 
 * Enhancements: 
-	* use <em>gapwp_useroptout</em> shortcode to easily generate opt-out buttons and links, [more details](https://deconf.com/google-analytics-gdpr-and-user-data-privacy-compliance)
-	* adding <em>gapwp_gtag_commands</em> and <em>gapwp_gtag_script_path</em> hooks to allow further gtag (Global Site Tag) code customization
+	* use <em>gacwp_useroptout</em> shortcode to easily generate opt-out buttons and links, [more details](https://deconf.com/google-analytics-gdpr-and-user-data-privacy-compliance)
+	* adding <em>gacwp_gtag_commands</em> and <em>gacwp_gtag_script_path</em> hooks to allow further gtag (Global Site Tag) code customization
 	* adds opt-out and DNT support for Google Tag Manager	
 	
 = 5.3.1.1 =
@@ -208,7 +208,7 @@ Google Analytics+ for WP it's released under the GPLv2, you can use it free of c
 	* disable autocomplete for the access code input field to avoid reuse of the same unique authorization code
 	* GAPWP Endpoint improvements
 	* Error reporting improvements
-	* introducing the gapwp_maps_api_key filter
+	* introducing the gacwp_maps_api_key filter
 * Bug Fixes:	
 	* use the theme color palette for the frontend widget 	 
 

@@ -188,6 +188,6 @@ class GAPWP_Install {
 			delete_option( 'ga_dash_refresh_token' );
 			delete_option( 'ga_dash_profile_list' );
 		}
-		add_option( 'gapwp_options', json_encode( $options ) );
+		add_option( 'gacwp_options', json_encode( $options ) );
 	}
 }
