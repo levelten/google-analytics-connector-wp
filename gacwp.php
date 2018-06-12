@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) )
 
 // Plugin Version
 if ( ! defined( 'GACWP_CURRENT_VERSION' ) ) {
-	define( 'GACWP_CURRENT_VERSION', '5.4.0.0-dev' );
+	define( 'GACWP_CURRENT_VERSION', '5.4.0' );
 }
 
 if ( ! defined( 'GACWP_ENDPOINT_URL' ) ) {

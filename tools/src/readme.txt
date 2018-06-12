@@ -8,7 +8,7 @@
 
  		- added an action hook to IO -> Abstract -> MakeRequest to enable custom endpoint support:
  
-			   public function makeRequest(Deconf_Http_Request $request)
+			   public function makeRequest(Deconfc_Http_Request $request)
 			   {
 			
 				  	// Add support for GACWP Endpoint
@@ -20,4 +20,4 @@
 				 
  * Updated the IO -> cacerts.pem file to support Let's Encrypt certificates
  
- * Changed 'Google' provider to 'Deconf', to avoid conflicts on different versions of GAPI PHP Client 	
+ * Changed 'Google' provider to 'Deconfc', to avoid conflicts on different versions of GAPI PHP Client

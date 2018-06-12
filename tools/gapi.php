@@ -28,9 +28,9 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 		public function __construct() {
 			$this->gacwp = GACWP();
 
-			include_once ( GACWP_DIR . 'tools/src/Deconf/autoload.php' );
-			$config = new Deconf_Config();
-			$config->setCacheClass( 'Deconf_Cache_Null' );
+			include_once ( GACWP_DIR . 'tools/src/Deconfc/autoload.php' );
+			$config = new Deconfc_Config();
+			$config->setCacheClass( 'Deconfc_Cache_Null' );
 			if ( function_exists( 'curl_version' ) ) {
 				$curlversion = curl_version();
 				$curl_options = array();
@@ -57,10 +57,10 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 
 				$curl_options = apply_filters( 'gacwp_curl_options', $curl_options );
 				if ( ! empty( $curl_options ) ) {
-					$config->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
+					$config->setClassConfig( 'Deconfc_IO_Curl', 'options', $curl_options );
 				}
 			}
-			$this->client = new Deconf_Client( $config );
+			$this->client = new Deconfc_Client( $config );
 			$this->client->setScopes( array( 'https://www.googleapis.com/auth/analytics.readonly' ) );
 			$this->client->setAccessType( 'offline' );
 			$this->client->setApplicationName( 'GACWP ' . GACWP_CURRENT_VERSION );
@@ -80,7 +80,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 			 */
 			add_action( 'gacwp_endpoint_support', array( $this, 'add_endpoint_support' ) );
 
-			$this->service = new Deconf_Service_Analytics( $this->client );
+			$this->service = new Deconfc_Service_Analytics( $this->client );
 			if ( $this->gacwp->config->options['token'] ) {
 				$token = $this->gacwp->config->options['token'];
 				if ( $token ) {
@@ -91,10 +91,10 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 							$this->client->refreshToken( $refreshtoken );
 						}
 						$this->gacwp->config->options['token'] = $this->client->getAccessToken();
-					} catch ( Deconf_IO_Exception $e ) {
+					} catch ( Deconfc_IO_Exception $e ) {
 						$timeout = $this->get_timeouts( 'midnight' );
 						GACWP_Tools::set_error( $e, $timeout );
-					} catch ( Deconf_Service_Exception $e ) {
+					} catch ( Deconfc_Service_Exception $e ) {
 						$timeout = $this->get_timeouts( 'midnight' );
 						GACWP_Tools::set_error( $e, $timeout );
 						$this->reset_token();
@@ -118,24 +118,24 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 				$url = $request->getUrl();
 
 				if ( in_array( $url, array( 'https://accounts.google.com/o/oauth2/token', 'https://accounts.google.com/o/oauth2/revoke' ) ) ) {
-					if ( get_class( $this->client->getIo() ) != 'Deconf_IO_Stream' ) {
-						$curl_old_options = $this->client->getClassConfig( 'Deconf_IO_Curl' );
+					if ( get_class( $this->client->getIo() ) != 'Deconfc_IO_Stream' ) {
+						$curl_old_options = $this->client->getClassConfig( 'Deconfc_IO_Curl' );
 						$curl_options = $curl_old_options['options'];
 						$curl_options[CURLOPT_SSL_VERIFYPEER] = 0;
-						$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
+						$this->client->setClassConfig( 'Deconfc_IO_Curl', 'options', $curl_options );
 					} else {
 						add_filter( 'gacwp_endpoint_stream_options', array( $this, 'add_endpoint_stream_ssl' ), 10 );
 					}
 				} else {
-					if ( get_class( $this->client->getIo() ) != 'Deconf_IO_Stream' ) {
-						$curl_old_options = $this->client->getClassConfig( 'Deconf_IO_Curl' );
+					if ( get_class( $this->client->getIo() ) != 'Deconfc_IO_Stream' ) {
+						$curl_old_options = $this->client->getClassConfig( 'Deconfc_IO_Curl' );
 						$curl_options = $curl_old_options['options'];
 						if ( isset( $curl_options[CURLOPT_SSL_VERIFYPEER] ) ) {
 							unset( $curl_options[CURLOPT_SSL_VERIFYPEER] );
 							if ( empty( $curl_options ) ) {
-								$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', '' );
+								$this->client->setClassConfig( 'Deconfc_IO_Curl', 'options', '' );
 							} else {
-								$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
+								$this->client->setClassConfig( 'Deconfc_IO_Curl', 'options', $curl_options );
 							}
 						}
 					}
@@ -269,11 +269,11 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 					GACWP_Tools::delete_cache( 'last_error' );
 				}
 				return $ga_profiles_list;
-			} catch ( Deconf_IO_Exception $e ) {
+			} catch ( Deconfc_IO_Exception $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
 				GACWP_Tools::set_error( $e, $timeout );
 				return $ga_profiles_list;
-			} catch ( Deconf_Service_Exception $e ) {
+			} catch ( Deconfc_Service_Exception $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
 				GACWP_Tools::set_error( $e, $timeout );
 			} catch ( Exception $e ) {
@@ -325,7 +325,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 		 *            $options
 		 * @param
 		 *            $serial
-		 * @return int|Deconf_Service_Analytics_GaData
+		 * @return int|Deconfc_Service_Analytics_GaData
 		 */
 		private function handle_corereports( $projectId, $from, $to, $metrics, $options, $serial ) {
 			try {
@@ -353,7 +353,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 				} else {
 					$data = $transient;
 				}
-			} catch ( Deconf_Service_Exception $e ) {
+			} catch ( Deconfc_Service_Exception $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
 				GACWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
@@ -868,7 +868,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 				} else {
 					$data = $transient;
 				}
-			} catch ( Deconf_Service_Exception $e ) {
+			} catch ( Deconfc_Service_Exception $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
 				GACWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
@@ -922,7 +922,7 @@ if ( ! class_exists( 'GACWP_GAPI_Controller' ) ) {
 		 * 		$to
 		 * @param
 		 * 		$filter
-		 * @return number|Deconf_Service_Analytics_GaData
+		 * @return number|Deconfc_Service_Analytics_GaData
 		 */
 		public function get( $projectId, $query, $from = false, $to = false, $filter = '', $metric = 'sessions' ) {
 			if ( empty( $projectId ) || ! is_numeric( $projectId ) ) {
