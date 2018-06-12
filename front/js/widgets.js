@@ -1,0 +1,1 @@
+jQuery(window).resize(function(){if(typeof gapwp_drawFrontWidgetChart=="function"&&typeof gapwpFrontWidgetData!=="undefined"&&!jQuery.isNumeric(gapwpFrontWidgetData)){gapwp_drawFrontWidgetChart(gapwpFrontWidgetData)}});

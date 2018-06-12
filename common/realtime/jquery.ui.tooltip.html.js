@@ -1,0 +1,1 @@
+jQuery(function(){jQuery("#gapwp-widget *").tooltip({items:"[data-gapwp]",content:function(){return jQuery(this).attr("data-gapwp")}})});
